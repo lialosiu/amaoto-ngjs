@@ -1,0 +1,18 @@
+md-menu
+    md-button(ng-click='$mdOpenMenu($event)')
+        md-icon account_circle
+        |  游客
+    md-menu-content(width='2')
+        md-menu-item
+            md-button(ng-click='vm.announceClick($index)')
+                md-icon person_add
+                | 注册
+        md-menu-item
+            md-button(ng-click='vm.announceClick($index)')
+                md-icon assignment_ind
+                | 登录
+        md-menu-divider
+        md-menu-item
+            md-button(ng-click='vm.changeState()')
+                md-icon settings_applications
+                | 管理后台
