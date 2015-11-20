@@ -1,13 +1,13 @@
-export function UserMenuDirective() {
+export function FileUploaderDirective() {
     'ngInject';
 
     let directive = {
         restrict: 'E',
-        templateUrl: 'app/directive/userMenu/userMenu.html',
+        templateUrl: 'app/directive/uploader/file/file.html',
         scope: {
             creationDate: '='
         },
-        controller: UserMenuController,
+        controller: FileUploaderController,
         controllerAs: 'vm',
         bindToController: true
     };
@@ -15,7 +15,7 @@ export function UserMenuDirective() {
     return directive;
 }
 
-class UserMenuController {
+class FileUploaderController {
     constructor($state, $amaotoCore) {
         'ngInject';
 

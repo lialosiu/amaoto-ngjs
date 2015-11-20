@@ -1,10 +1,10 @@
-export class HomepageController {
-    constructor($log, toastr, $timeout, $amaotoCore) {
+export class ConsoleController {
+    constructor($log, toastr, $amaotoCore, $state) {
         'ngInject';
 
         this.$log = $log;
         this.toastr = toastr;
-        this.$timeout = $timeout;
         this.$amaotoCore = $amaotoCore;
+        this.$state = $state;
     }
 }

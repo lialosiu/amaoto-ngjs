@@ -1,0 +1,17 @@
+div
+    md-button(ng-click='vm.prevPage()') prev
+    md-button(ng-click='vm.nextPage()') next
+    md-list
+        md-list-item.md-1-line
+            .md-list-item-text(layout='row', layout-fill)
+                span(flex='10') ID
+                span(flex='30') 用户名
+                span(flex='30') Email
+                span(flex) 创建时间
+        md-divider
+        md-list-item.md-1-line(ng-repeat='user in vm.list')
+            .md-list-item-text(layout='row', layout-fill)
+                span(flex='10') {{ user.id }}
+                span(flex='30') {{ user.username }}
+                span(flex='30') {{ user.email }}
+                span(flex) {{ user.created_at }}

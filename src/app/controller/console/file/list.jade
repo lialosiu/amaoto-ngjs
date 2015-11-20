@@ -1,0 +1,20 @@
+div
+    md-button(ng-click='vm.prevPage()') prev
+    md-button(ng-click='vm.nextPage()') next
+    md-list
+        md-list-item.md-1-line
+            .md-list-item-text(layout='row', layout-fill)
+                span(flex='10') ID
+                span(flex='30') 用户名
+                span(flex='30') Email
+                span(flex) 创建时间
+        md-divider
+        md-list-item.md-1-line(ng-repeat='file in vm.list')
+            .md-list-item-text(layout='row', layout-fill)
+                span(flex='10') {{ file.id }}
+                span(flex='30') {{ file.username }}
+                span(flex='30') {{ file.email }}
+                span(flex) {{ file.created_at }}
+
+div
+    md-button(ng-click='vm.showUploadDialog($event)') 上传文件
