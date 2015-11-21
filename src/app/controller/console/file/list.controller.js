@@ -42,14 +42,10 @@ export class FileListController {
     }
 
     showUploadDialog(ev) {
-        let self = this;
         this.$mdDialog.show({
-            controller: ()=> {
-                $scope.close = function () {
-                    self.$mdDialog.hide();
-                };
-            },
             templateUrl: 'app/dialog/uploader/general.html',
+            controller: 'UploaderDialogController',
+            controllerAs: 'vm',
             //parent: angular.element(ev.target),
             targetEvent: ev,
             clickOutsideToClose: true

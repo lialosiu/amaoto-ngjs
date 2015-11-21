@@ -3,20 +3,18 @@
 import { config } from './index.config';
 import { routerConfig } from './index.route';
 import { runBlock } from './index.run';
-import { MainController } from './main/main.controller';
+//import { MainController } from './main/main.controller';
 import { HomepageController } from './controller/homepage/homepage.controller';
 import { ConsoleController } from './controller/console/console.controller';
 import { UploaderDialogController } from './dialog/uploader/general.controller';
 import { UserListController as Console_UserListController } from './controller/console/user/list.controller';
 import { FileListController as Console_FileListController } from './controller/console/file/list.controller';
 import { AmaotoCoreService } from '../app/service/amaotoCore/amaotoCore.service';
-import { GithubContributorService } from '../app/components/githubContributor/githubContributor.service';
-import { WebDevTecService } from '../app/components/webDevTec/webDevTec.service';
+//import { GithubContributorService } from '../app/components/githubContributor/githubContributor.service';
+//import { WebDevTecService } from '../app/components/webDevTec/webDevTec.service';
 //import { NavbarDirective } from '../app/components/navbar/navbar.directive';
 import { MalarkeyDirective } from '../app/components/malarkey/malarkey.directive';
 import { UserMenuDirective } from '../app/directive/userMenu/userMenu.directive';
-import { FileUploaderDirective } from '../app/directive/uploader/file/file.directive';
-;
 import { FileUploaderDirective } from '../app/directive/uploader/file/file.directive';
 
 angular.module('amaotoNgjs', [
@@ -38,9 +36,9 @@ angular.module('amaotoNgjs', [
     .config(routerConfig)
     .run(runBlock)
     .service('$amaotoCore', AmaotoCoreService)
-    .service('githubContributor', GithubContributorService)
-    .service('webDevTec', WebDevTecService)
-    .controller('MainController', MainController)
+    //.service('githubContributor', GithubContributorService)
+    //.service('webDevTec', WebDevTecService)
+    //.controller('MainController', MainController)
     .controller('HomepageController', HomepageController)
     .controller('ConsoleController', ConsoleController)
     .controller('UploaderDialogController', UploaderDialogController)

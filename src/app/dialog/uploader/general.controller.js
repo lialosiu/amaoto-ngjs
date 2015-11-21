@@ -1,7 +1,8 @@
 export class UploaderDialogController {
     constructor($mdDialog) {
-        this.$mdDialog = $mdDialog;
         'ngInject';
+
+        this.$mdDialog = $mdDialog;
     }
 
     cancel() {
