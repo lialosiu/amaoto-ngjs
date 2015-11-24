@@ -1,14 +1,12 @@
-md-dialog(aria-label='Mango (Fruit)', ng-cloak='')
+md-dialog(aria-label='General Uploader Dialog', flex)
     form
         md-toolbar.md-toolbar-tools
             h2 文件上传
-            span(flex='')
+            span(flex)
             md-button.md-icon-button(ng-click='vm.cancel()')
                 md-icon close
         md-dialog-content.md-dialog-content
             amaoto-file-uploader
         md-dialog-actions.md-actions(layout='row')
-            md-button(ng-click="answer('not useful')")
-                | Not Useful
-            md-button(ng-click="answer('useful')", style='margin-right:20px;')
-                | Useful
+            md-button
+                | 确定

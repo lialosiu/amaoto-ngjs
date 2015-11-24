@@ -1,6 +1,4 @@
 div
-    md-button(ng-click='vm.prevPage()') prev
-    md-button(ng-click='vm.nextPage()') next
     md-list
         md-list-item.md-1-line
             .md-list-item-text(layout='row', layout-fill)
@@ -17,4 +15,6 @@ div
                 span(flex) {{ file.created_at }}
 
 div
+    md-button(ng-click='vm.prevPage()') prev
+    md-button(ng-click='vm.nextPage()') next
     md-button(ng-click='vm.showUploadDialog($event)') 上传文件

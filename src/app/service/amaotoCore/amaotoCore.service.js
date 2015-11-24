@@ -1,5 +1,4 @@
 export class AmaotoCoreService {
-
     constructor($log, toastr, $http, $mdDialog, $timeout) {
         'ngInject';
         this.$log = $log;
@@ -7,10 +6,17 @@ export class AmaotoCoreService {
         this.toastr = toastr;
         this.$timeout = $timeout;
 
-        this.amaotoCoreHost = 'http://amaoto-core.localhost/';
+        this.API_HOST = 'http://amaoto-core.localhost/';
+        this.API_GET_SYSTEM_INFO = 'api/system/info';
+        this.API_GET_USER_PAGINATE = 'api/user/paginate';
+        this.API_GET_FILE_PAGINATE = 'api/file/paginate';
+        this.API_POST_FILE_UPLOAD = 'api/file/upload';
+        this.API_GET_FILE_UPLOADED_SIZE = 'api/file/uploaded-size';
+
         this.site_name = undefined;
         this.powered_name = undefined;
         this.version = undefined;
+        this.xdebugKey = undefined;
 
         this.getSystemInfo().then((rsp)=> {
             toastr.info("Connected.");
@@ -19,16 +25,36 @@ export class AmaotoCoreService {
             }, 1000);
         }).catch((e)=> {
             $log.error(e);
+            let message = '';
+            if (e.data && e.data.message)
+                message = e.data.message;
+            else
+                message = e.status;
             $mdDialog.show($mdDialog.alert({
                 title: '连接服务器失败',
-                content: e.data.message,
+                content: message,
                 ok: '确认'
             }));
         });
     }
 
+    url(url) {
+        url = this.API_HOST + url;
+        if (this.xdebugKey) {
+            if (url.indexOf('?') == -1)
+                url = url + '?XDEBUG_SESSION_START=' + this.xdebugKey;
+            else
+                url = url + '&XDEBUG_SESSION_START=' + this.xdebugKey;
+        }
+        return url;
+    }
+
+    xdebug(key) {
+        this.xdebugKey = key;
+    }
+
     getSystemInfo() {
-        return this.$http.get(this.amaotoCoreHost + 'api/system/info')
+        return this.$http.get(this.url(this.API_GET_SYSTEM_INFO))
             .then((response)=> {
                 let rsp = angular.fromJson(response.data);
                 this.site_name = rsp.data.site_name;
@@ -39,7 +65,7 @@ export class AmaotoCoreService {
     }
 
     getUserPaginate(page = 1, num = 15) {
-        return this.$http.get(this.amaotoCoreHost + 'api/user/paginate' + '?page=' + page + '&num=' + num)
+        return this.$http.get(this.url(this.API_GET_USER_PAGINATE + '?page=' + page + '&num=' + num))
             .then((response)=> {
                 let rsp = angular.fromJson(response.data);
                 this.$log.debug(rsp);
@@ -48,7 +74,7 @@ export class AmaotoCoreService {
     }
 
     getFilePaginate(page = 1, num = 15) {
-        return this.$http.get(this.amaotoCoreHost + 'api/file/paginate' + '?page=' + page + '&num=' + num)
+        return this.$http.get(this.url(this.API_GET_FILE_PAGINATE + '?page=' + page + '&num=' + num))
             .then((response)=> {
                 let rsp = angular.fromJson(response.data);
                 this.$log.debug(rsp);
