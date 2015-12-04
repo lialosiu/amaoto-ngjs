@@ -3,17 +3,25 @@
 import { config } from './index.config';
 import { routerConfig } from './index.route';
 import { runBlock } from './index.run';
+
+// Controller
 //import { MainController } from './main/main.controller';
+import { AuthController } from './controller/auth/auth.controller';
+import { SignInController as Auth_SignInController } from './controller/auth/sign-in/sign-in.controller';
 import { HomepageController } from './controller/homepage/homepage.controller';
 import { ConsoleController } from './controller/console/console.controller';
 import { UploaderDialogController } from './dialog/uploader/general.controller';
 import { UserListController as Console_UserListController } from './controller/console/user/list.controller';
 import { FileListController as Console_FileListController } from './controller/console/file/list.controller';
+
+// Service
 import { AmaotoCoreService } from '../app/service/amaotoCore/amaotoCore.service';
 //import { GithubContributorService } from '../app/components/githubContributor/githubContributor.service';
 //import { WebDevTecService } from '../app/components/webDevTec/webDevTec.service';
+
+// Directive
 //import { NavbarDirective } from '../app/components/navbar/navbar.directive';
-import { MalarkeyDirective } from '../app/components/malarkey/malarkey.directive';
+//import { MalarkeyDirective } from '../app/components/malarkey/malarkey.directive';
 import { UserMenuDirective } from '../app/directive/userMenu/userMenu.directive';
 import { FileUploaderDirective } from '../app/directive/uploader/file/file.directive';
 
@@ -39,6 +47,8 @@ angular.module('amaotoNgjs', [
     //.service('githubContributor', GithubContributorService)
     //.service('webDevTec', WebDevTecService)
     //.controller('MainController', MainController)
+    .controller('AuthController', AuthController)
+    .controller('Auth_SignInController', Auth_SignInController)
     .controller('HomepageController', HomepageController)
     .controller('ConsoleController', ConsoleController)
     .controller('UploaderDialogController', UploaderDialogController)
@@ -46,4 +56,4 @@ angular.module('amaotoNgjs', [
     .controller('Console_FileListController', Console_FileListController)
     .directive('amaotoUserMenu', UserMenuDirective)
     .directive('amaotoFileUploader', FileUploaderDirective)
-    .directive('acmeMalarkey', MalarkeyDirective);
+    //.directive('acmeMalarkey', MalarkeyDirective);

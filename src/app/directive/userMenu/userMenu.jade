@@ -1,7 +1,7 @@
 md-menu
     md-button(ng-click='$mdOpenMenu($event)')
         md-icon account_circle
-        |  游客
+        | &nbsp;{{ vm.$amaotoCore.localData.currentUser.username }}
     md-menu-content(width='2')
         md-menu-item
             md-button(ng-click='vm.announceClick($index)')

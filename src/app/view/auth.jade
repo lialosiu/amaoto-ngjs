@@ -1,0 +1,12 @@
+div(style='position: fixed; top: 0; left: 0; right: 0;')
+    md-toolbar.md-toolbar-tools
+        h2
+            span(ng-bind='vm.$amaotoCore.site_name')
+        small
+            span &nbsp;Ver.
+            span(ng-bind='vm.$amaotoCore.version')
+        span(flex)
+        amaoto-user-menu
+
+div(layout="vertical", layout-fill)
+    div(ui-view='auth.frame', layout-fill)

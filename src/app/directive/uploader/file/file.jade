@@ -1,4 +1,4 @@
-form(name='form')
+div
     md-list
         md-list-item.md-2-line(ng-repeat='file in vm.files', ng-switch='file.status')
             md-card.md-list-item-text.file-list(layout='column', layout-padding, ng-switch-when='added')

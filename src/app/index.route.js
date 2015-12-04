@@ -21,6 +21,27 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
                 }
             }
         })
+        .state('auth', {
+            url: '/auth',
+            views: {
+                'top.frame': {
+                    templateUrl: 'app/view/auth.html',
+                    controller: 'AuthController',
+                    controllerAs: 'vm'
+                }
+            },
+            abstract: true
+        })
+        .state('auth.sign-in', {
+            url: '/sign-in',
+            views: {
+                'auth.frame': {
+                    templateUrl: 'app/view/auth/sign-in.html',
+                    controller: 'Auth_SignInController',
+                    controllerAs: 'vm'
+                }
+            }
+        })
         .state('console', {
             url: '/console',
             views: {
@@ -30,9 +51,10 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
                     controllerAs: 'vm'
                 }
             },
-            resolve: ($amaotoCore)=> {
-                'ngInject';
-                $amaotoCore.getSystemInfo();
+            event: {
+                '$stateChangeStart': [
+                    'NotAdminRedirectToSignIn'
+                ]
             }
         })
         .state('console.user', {
@@ -46,7 +68,6 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
         })
         .state('console.user.list', {
             url: '/list',
-
             views: {
                 'console.user.frame@console.user': {
                     templateUrl: 'app/controller/console/user/list.html',
