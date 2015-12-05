@@ -96,6 +96,26 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
                 }
             }
         })
+        .state('console.image', {
+            url: '/image',
+            views: {
+                'console.frame@console': {
+                    template: '<div ui-view="console.image.frame">'
+                }
+            },
+            abstract: true
+        })
+        .state('console.image.list', {
+            url: '/list',
+
+            views: {
+                'console.image.frame@console.image': {
+                    templateUrl: 'app/controller/console/image/list/list.html',
+                    controller: 'Console_ImageListController',
+                    controllerAs: 'vm'
+                }
+            }
+        })
     ;
 
     $urlRouterProvider.otherwise('/');

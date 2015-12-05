@@ -8,7 +8,7 @@ md-menu
                 md-icon person_add
                 | 注册
         md-menu-item
-            md-button(ng-click='vm.announceClick($index)')
+            md-button(ng-click='vm.$state.go("auth.sign-in")')
                 md-icon assignment_ind
                 | 登录
         md-menu-divider

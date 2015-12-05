@@ -15,6 +15,9 @@ export class AmaotoCoreService {
         this.API_GET_FILE_PAGINATE = 'api/file/paginate';
         this.API_POST_FILE_UPLOAD = 'api/file/upload';
         this.API_GET_FILE_UPLOADED_SIZE = 'api/file/uploaded-size';
+        this.API_GET_IMAGE_PAGINATE = 'api/image/paginate';
+        this.API_POST_IMAGE_UPLOAD = 'api/image/upload';
+        this.API_GET_IMAGE_UPLOADED_SIZE = 'api/image/uploaded-size';
 
         this.xdebugKey = undefined;
 
@@ -124,6 +127,15 @@ export class AmaotoCoreService {
 
     getFilePaginate(page = 1, num = 15) {
         return this.$http.get(this.url(this.API_GET_FILE_PAGINATE + '?page=' + page + '&num=' + num))
+            .then((response)=> {
+                let rsp = angular.fromJson(response.data);
+                this.$log.debug(rsp);
+                return rsp;
+            });
+    }
+
+    getImagePaginate(page = 1, num = 15) {
+        return this.$http.get(this.url(this.API_GET_IMAGE_PAGINATE + '?page=' + page + '&num=' + num))
             .then((response)=> {
                 let rsp = angular.fromJson(response.data);
                 this.$log.debug(rsp);

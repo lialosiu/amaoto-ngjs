@@ -1,0 +1,12 @@
+md-dialog(aria-label='General Uploader Dialog', flex)
+    form
+        md-toolbar.md-toolbar-tools
+            h2 图片上传
+            span(flex)
+            md-button.md-icon-button(ng-click='vm.cancel()')
+                md-icon close
+        md-dialog-content.md-dialog-content
+            amaoto-image-uploader
+        md-dialog-actions.md-actions(layout='row')
+            md-button
+                | 确定

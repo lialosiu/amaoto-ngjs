@@ -9,12 +9,13 @@ div(style='position: fixed; top: 0; left: 0; right: 0;')
             md-icon account_box
             |  用户
         md-button(ng-click='vm.$state.go("console.file.list")')
-            md-icon account_box
             |  文件
+        md-button(ng-click='vm.$state.go("console.image.list")')
+            |  图片
         span(flex)
         amaoto-user-menu
 
 div(style='height: 64px;')
 
-div(layout="vertical", layout-fill)
+div(layout="vertical")
     div(ui-view='console.frame', layout-fill)
