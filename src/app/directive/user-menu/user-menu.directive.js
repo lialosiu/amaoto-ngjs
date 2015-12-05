@@ -3,7 +3,7 @@ export function UserMenuDirective() {
 
     let directive = {
         restrict: 'E',
-        templateUrl: 'app/directive/userMenu/userMenu.html',
+        templateUrl: 'app/directive/user-menu/user-menu.html',
         scope: {
             creationDate: '='
         },

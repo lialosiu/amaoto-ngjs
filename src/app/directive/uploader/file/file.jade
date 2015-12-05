@@ -8,20 +8,30 @@ div
                         small {{ file.size }}
                 div(layout='row')
                     div.file-type(flex)
-                        small {{ file.type }}
+                        small {{ file.mime }}
                     div.file-status
                         small 待上传
-            md-card.md-list-item-text.file-list(layout='column', layout-padding, ng-switch-default)
+            md-card.md-list-item-text.file-list(layout='column', layout-padding, ng-switch-when='uploading')
                 div(layout='row', layout-align='space-between', layout-fill)
                     div.file-name(flex) {{ file.name }}
                     div.file-size
                         small {{ file.size }}
                 div(layout='row')
                     div.file-type(flex)
-                        small {{ file.type }}
+                        small {{ file.mime }}
                     div.file-status
                         small 正在上传
                 md-progress-linear.file-upload-progress(md-mode='determinate', value='{{ file.uploadProgress }}')
+            md-card.md-list-item-text.file-list(layout='column', layout-padding, ng-switch-when='uploaded')
+                div(layout='row', layout-align='space-between', layout-fill)
+                    div.file-name(flex) {{ file.name }}
+                    div.file-size
+                        small {{ file.size }}
+                div(layout='row')
+                    div.file-type(flex)
+                        small {{ file.mime }}
+                    div.file-status
+                        small 上传完成
         md-list-item.md-1-line
             div.md-list-item-text(layout='row', layout-fill)
                 md-button.md-raised(flex, ngf-select, ng-model='vm.addedFiles', ngf-change='vm.added()', ngf-multiple='true', ngf-max-size='20MB')

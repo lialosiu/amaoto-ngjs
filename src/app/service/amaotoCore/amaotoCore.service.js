@@ -16,20 +16,23 @@ export class AmaotoCoreService {
         this.API_POST_FILE_UPLOAD = 'api/file/upload';
         this.API_GET_FILE_UPLOADED_SIZE = 'api/file/uploaded-size';
 
-        this.site_name = undefined;
-        this.powered_name = undefined;
-        this.version = undefined;
         this.xdebugKey = undefined;
 
         this.localData = {};
+        this.localData.serverInfo = {};
+        this.localData.serverInfo.siteName = "#SITE_NAME#";
+        this.localData.serverInfo.poweredName = "#POWERED_NAME#";
+        this.localData.serverInfo.version = "#VERSION#";
         this.localData.currentUser = {};
         this.localData.currentUser.username = "游客";
         this.localData.currentUser.isSignedIn = false;
+        this.localData.currentUser.isMaster = false;
+        this.localData.currentUser.isAdministrator = false;
 
-        this.getSystemInfo().then((rsp)=> {
+        this.connectToServer().then(()=> {
             toastr.info("Connected.");
             $timeout(()=> {
-                toastr.info("Version " + rsp.data.version)
+                toastr.info("Version " + this.localData.serverInfo.version)
             }, 1000);
         }).catch((e)=> {
             $log.error(e);
@@ -61,13 +64,19 @@ export class AmaotoCoreService {
         this.xdebugKey = key;
     }
 
+    connectToServer() {
+        return this.getSystemInfo().then(()=> {
+            return this.getCurrentUser().then();
+        });
+    }
+
     getSystemInfo() {
         return this.$http.get(this.url(this.API_GET_SYSTEM_INFO))
             .then((response)=> {
                 let rsp = angular.fromJson(response.data);
-                this.site_name = rsp.data.site_name;
-                this.powered_name = rsp.data.powered_name;
-                this.version = rsp.data.version;
+                this.localData.serverInfo.siteName = rsp.data.site_name;
+                this.localData.serverInfo.poweredName = rsp.data.powered_name;
+                this.localData.serverInfo.version = rsp.data.version;
                 return rsp;
             });
     }
@@ -80,8 +89,10 @@ export class AmaotoCoreService {
             .then((response)=> {
                 let rsp = angular.fromJson(response.data);
                 this.$log.debug(rsp);
+                this.localData.currentUser.username = rsp.data.username;
+                this.localData.currentUser.isSignedIn = true;
                 return rsp;
-            }).catch((e)=>{
+            }).catch((e)=> {
                 this.$log.debug(e);
                 this.$mdDialog.show(this.$mdDialog.alert({
                     title: '登录失败',
@@ -96,6 +107,8 @@ export class AmaotoCoreService {
             .then((response)=> {
                 let rsp = angular.fromJson(response.data);
                 this.$log.debug(rsp);
+                this.localData.currentUser.username = rsp.data.username;
+                this.localData.currentUser.isSignedIn = true;
                 return rsp;
             });
     }

@@ -1,4 +1,4 @@
-export class UploaderDialogController {
+export class FileUploaderDialogController {
     constructor($mdDialog) {
         'ngInject';
 

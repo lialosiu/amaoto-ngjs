@@ -40,6 +40,6 @@ export function runBlock($log, $amaotoCore, $rootScope, $state, $window) {
         //$log.debug('^fromParams');
     });
     $rootScope.$on('$destroy', deregistrationCallback);
-    $amaotoCore.xdebug(12420);
+    $amaotoCore.xdebug(13495);
     $log.debug('runBlock end');
 }

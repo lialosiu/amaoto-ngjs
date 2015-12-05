@@ -15,5 +15,5 @@ export function config($logProvider, toastrConfig, $mdThemingProvider, $httpProv
         .accentPalette('indigo');
 
     $httpProvider.defaults.useXDomain = true;
-    //$httpProvider.defaults.headers.common = 'Content-Type: application/json';
+    $httpProvider.defaults.withCredentials = true;
 }

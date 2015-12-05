@@ -38,7 +38,7 @@ class FileUploaderController {
             file.status = 'added';
             file.name = addedFile.name;
             file.size = addedFile.size;
-            file.type = addedFile.type;
+            file.mime = addedFile.mime;
             file.uploadProgress = 0;
             file.uniName = encodeURIComponent(file.name) + '-' + file.size + '-' + file.lastModified;
             file.data = addedFile;
@@ -62,9 +62,14 @@ class FileUploaderController {
                 resumeSizeUrl: self.$amaotoCore.url(self.$amaotoCore.API_GET_FILE_UPLOADED_SIZE + '?uniName=' + file.uniName),
                 resumeChunkSize: '2MB'
             }).then(function (resp) {
-                self.$log.debug('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+                // Success
+                let data = resp.data.data;
+                file.name = data.name;
+                file.status = 'uploaded';
+                file.mime = data.mime;
+                self.$log.debug(resp);
             }, function (resp) {
-                self.$log.debug('Error status: ' + resp.status);
+                self.$log.debug(resp);
             }, function (evt) {
                 file.uploadProgress = parseInt(100.0 * evt.loaded / evt.total);
             });
