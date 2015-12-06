@@ -1,4 +1,4 @@
-export function config($logProvider, toastrConfig, $mdThemingProvider, $httpProvider) {
+export function config($logProvider, toastrConfig, $mdThemingProvider, $httpProvider, $sceDelegateProvider) {
     'ngInject';
     // Enable log
     $logProvider.debugEnabled(true);
@@ -16,4 +16,6 @@ export function config($logProvider, toastrConfig, $mdThemingProvider, $httpProv
 
     $httpProvider.defaults.useXDomain = true;
     $httpProvider.defaults.withCredentials = true;
+
+    $sceDelegateProvider.resourceUrlWhitelist(['**']);
 }

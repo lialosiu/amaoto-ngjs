@@ -1,16 +1,6 @@
 export function routerConfig($stateProvider, $urlRouterProvider) {
     'ngInject';
     $stateProvider
-    //.state('main', {
-    //    url: '/main',
-    //    views: {
-    //        'top.frame': {
-    //            templateUrl: 'app/main/main.html',
-    //            controller: 'MainController',
-    //            controllerAs: 'main'
-    //        }
-    //    }
-    //})
         .state('homepage', {
             url: '/',
             views: {
@@ -112,6 +102,26 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
                 'console.image.frame@console.image': {
                     templateUrl: 'app/controller/console/image/list/list.html',
                     controller: 'Console_ImageListController',
+                    controllerAs: 'vm'
+                }
+            }
+        })
+        .state('console.music', {
+            url: '/music',
+            views: {
+                'console.frame@console': {
+                    template: '<div ui-view="console.music.frame">'
+                }
+            },
+            abstract: true
+        })
+        .state('console.music.list', {
+            url: '/list',
+
+            views: {
+                'console.music.frame@console.music': {
+                    templateUrl: 'app/controller/console/music/list/list.html',
+                    controller: 'Console_MusicListController',
                     controllerAs: 'vm'
                 }
             }

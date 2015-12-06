@@ -18,6 +18,10 @@ export class AmaotoCoreService {
         this.API_GET_IMAGE_PAGINATE = 'api/image/paginate';
         this.API_POST_IMAGE_UPLOAD = 'api/image/upload';
         this.API_GET_IMAGE_UPLOADED_SIZE = 'api/image/uploaded-size';
+        this.API_GET_MUSIC_PAGINATE = 'api/music/paginate';
+        this.API_POST_MUSIC_UPLOAD = 'api/music/upload';
+        this.API_GET_MUSIC_UPLOADED_SIZE = 'api/music/uploaded-size';
+
 
         this.xdebugKey = undefined;
 
@@ -138,6 +142,15 @@ export class AmaotoCoreService {
 
     getImagePaginate(page = 1, num = 15) {
         return this.$http.get(this.url(this.API_GET_IMAGE_PAGINATE + '?page=' + page + '&num=' + num))
+            .then((response)=> {
+                let rsp = angular.fromJson(response.data);
+                this.$log.debug(rsp);
+                return rsp;
+            });
+    }
+
+    getMusicPaginate(page = 1, num = 15) {
+        return this.$http.get(this.url(this.API_GET_MUSIC_PAGINATE + '?page=' + page + '&num=' + num))
             .then((response)=> {
                 let rsp = angular.fromJson(response.data);
                 this.$log.debug(rsp);

@@ -1,5 +1,9 @@
-export function runBlock($log, $amaotoCore, $rootScope, $state, $window) {
+export function runBlock($log, $amaotoCore, $rootScope){//}), $state, $window) {
     'ngInject';
+
+    //todo
+
+    /*
     let deregistrationCallback = $rootScope.$on('$stateChangeStart', (e, toState) => {
         let cases = [];
         {
@@ -39,7 +43,8 @@ export function runBlock($log, $amaotoCore, $rootScope, $state, $window) {
         //$log.debug(fromParams);
         //$log.debug('^fromParams');
     });
-    $rootScope.$on('$destroy', deregistrationCallback);
+     */
+    //$rootScope.$on('$destroy', deregistrationCallback);
     $amaotoCore.xdebug(13495);
     $log.debug('runBlock end');
 }
