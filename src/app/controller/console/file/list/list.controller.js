@@ -44,7 +44,7 @@ export class FileListController {
     showUploadDialog(ev) {
         this.$mdDialog.show({
             templateUrl: 'app/dialog/uploader/file/file.html',
-            controller: 'FileUploaderDialogController',
+            controller: 'Dialog_FileUploaderDialogController',
             controllerAs: 'vm',
             //parent: angular.element(ev.target),
             targetEvent: ev,

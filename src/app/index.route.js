@@ -90,7 +90,7 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
 
             views: {
                 'console.file.frame@console.file': {
-                    templateUrl: 'app/controller/console/file/list.html',
+                    templateUrl: 'app/controller/console/file/list/list.html',
                     controller: 'Console_FileListController',
                     controllerAs: 'vm'
                 }
