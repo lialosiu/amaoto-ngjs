@@ -110,8 +110,10 @@ export class AmaotoCoreService {
             .then((response)=> {
                 let rsp = angular.fromJson(response.data);
                 this.$log.debug(rsp);
-                this.localData.currentUser.username = rsp.data.username;
-                this.localData.currentUser.isSignedIn = true;
+                if (rsp.data && rsp.data.username) {
+                    this.localData.currentUser.username = rsp.data.username;
+                    this.localData.currentUser.isSignedIn = true;
+                }
                 return rsp;
             });
     }
