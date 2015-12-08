@@ -5,11 +5,14 @@ div.amaoto-v2-player
         div.meta
             span.title {{ vm.$amaotoPlayer.playing.title }}
             span.artist {{ vm.$amaotoPlayer.playing.artist ? '&nbsp;-&nbsp;' + vm.$amaotoPlayer.playing.artist : '' }}
+            md-progress-linear.progress.md-warn(md-mode='{{ vm.$amaotoPlayer.player.canPlay ? "buffer": "indeterminate" }}', value='{{ vm.$amaotoPlayer.player.progress * 100 }}', md-buffer-value='{{ vm.$amaotoPlayer.player.audio.buffered.length > 0 ? vm.$amaotoPlayer.player.audio.buffered.end(vm.$amaotoPlayer.player.audio.buffered.length - 1) / vm.$amaotoPlayer.player.audio.duration * 100 : 0 }}')
+            md-slider.progress-setter.md-warn(ng-model='vm.$amaotoPlayer.player.progress', min='0', max='1', step='0.001')
         div.controller
             div.btns
-                md-button.play(ng-click='vm.$amaotoPlayer.player.play()') P
-                md-button.play(ng-click='vm.$amaotoPlayer.player.stop()') S
-            span.title {{ vm.$amaotoPlayer.player.currentTime }}
+                md-button.md-fab.md-mini.md-warn(ng-click='vm.$amaotoPlayer.player.play()')
+                    md-icon play_arrow
+                md-button.md-fab.md-mini.md-warn(ng-click='vm.$amaotoPlayer.player.stop()')
+                    md-icon stop
 
 //div.simple-player
 //    div.player

@@ -19,8 +19,10 @@ export class AmaotoPlayerService {
         this.playing.artist = music.artist;
         this.playing.cover_thumbnail = music.show_thumbnail_cover_url;
         this.playing.url = music.show_url;
-        if (typeof this.player != 'undefined')
-            this.player.destroy();
+        if (typeof this.player != 'undefined'){
+            this.player.stop();
+            this.$log.debug('stop');
+        }
         this.player = this.ngAudio.load(this.playing.url);
     }
 

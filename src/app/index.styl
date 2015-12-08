@@ -2,43 +2,48 @@
  *  Do not remove the comments below. It's the markers used by wiredep to inject
  *  stylus dependencies when defined in the bower.json of your dependencies
  */
-// bower:styl
+// bowerstyl
 // endbower
 
 @font-face
-  font-family: 'Material Icons';
-  font-style: normal;
-  font-weight: 400;
-  src: url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.eot); /* For IE6-8 */
-  src: local('Material Icons'),
-          local('MaterialIcons-Regular'),
-          url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.woff2) format('woff2'),
-          url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.woff) format('woff'),
-          url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.ttf) format('truetype');
+  font-family 'Material Icons'
+  font-style normal
+  font-weight 400
+  src url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.eot) /* For IE6-8 */
+  src local('Material Icons')
+
+,
+local('MaterialIcons-Regular')
+,
+url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.woff2) format('woff2')
+,
+url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.woff) format('woff')
+,
+url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.ttf) format('truetype')
 
 .material-icons
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px; /* Preferred icon size */
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
+  font-family 'Material Icons'
+  font-weight normal
+  font-style normal
+  font-size 24px /* Preferred icon size */
+  display inline-block
+  width 1em
+  height 1em
+  line-height 1
+  text-transform none
+  letter-spacing normal
+  word-wrap normal
 
   /* Support for all WebKit browsers. */
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing antialiased
   /* Support for Safari and Chrome. */
-  text-rendering: optimizeLegibility;
+  text-rendering optimizeLegibility
 
   /* Support for Firefox. */
-  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing grayscale
 
   /* Support for IE. */
-  font-feature-settings: 'liga';
+  font-feature-settings 'liga'
 
 html
   font-family "Microsoft YaHei UI", "Helvetica Neue", Helvetica, Arial, sans-serif
@@ -104,26 +109,59 @@ section
     height 100px
     width 100px
     border-radius 0 0 5px 0
-    box-shadow 0 0 15px rgba(0 0 0 0.3)
+    box-shadow 0 0 15px rgba(0 0 0 0.5)
     overflow hidden
     z-index 10
     img
       height 100%
       width 100%
   .player
+    $height = 50px
     position absolute
     top 0
     left 100px
     right 0
-    height 40px
-    background rgba(255 255 255 0.8)
-    box-shadow 0 0 15px rgba(0 0 0 0.3)
+    height $height
+    background rgba(240 240 240 0.8)
+    box-shadow 0 0 15px rgba(0 0 0 0.5)
     .meta
-      padding 5px 10px
+      height $height
+      line-height $height
+      padding 0 ($height / 3)
       .title
-        font-size 1em
+        font-size 1.4em
+        color #8c0000
+        text-shadow 0 0 3px rgba(255 255 255 0.8)
       .artist
-        font-size 0.5em
+        font-size 0.8em
+        color #4c4c4c
+        text-shadow 0 0 3px rgba(255 255 255 0.8)
+      .progress
+        position absolute
+        bottom 0
+        left 0
+        right 0
+        opacity 1
+        transition opacity 0.3s
+      .progress-setter
+        opacity 0
+        transition opacity 0.3s
+        position absolute
+        bottom 0 - 23px
+        left 0
+        right 0
+        margin 0
+      &:hover
+        .progress
+          opacity 0
+        .progress-setter
+          opacity 1
+    .controller
+      transition opacity 0.3s
+      opacity 0
+    &:hover
+      .controller
+        opacity 1
 
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject
