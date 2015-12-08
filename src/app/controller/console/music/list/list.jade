@@ -21,7 +21,7 @@ div
             span(flex='10') {{ music.track }}
             span(flex='10') {{ music.bitrate_4_display }}
             span(flex='20')
-                audio(ng-src='{{ music.show_url }}' controls)
+                amaoto-simple-player(ng-src='{{ music.show_url }}')
 
 div
     md-button(ng-click='vm.prevPage()') prev

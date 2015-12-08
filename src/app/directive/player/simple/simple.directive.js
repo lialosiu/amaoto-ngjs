@@ -16,10 +16,19 @@ export function SimplePlayerDirective() {
 }
 
 class SimplePlayerController {
-    constructor($state, $amaotoCore) {
+    constructor($state, $amaotoCore, $attrs, $log, ngAudio, $scope) {
         'ngInject';
 
         this.$state = $state;
         this.$amaotoCore = $amaotoCore;
+        this.$attrs = $attrs;
+        this.ngAudio = ngAudio;
+        this.player = undefined;
+
+        let self = this;
+        $attrs.$observe('ngSrc', function (v) {
+            $log.debug(v);
+            self.player = ngAudio.load(v, $scope);
+        });
     }
 }

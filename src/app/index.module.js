@@ -5,6 +5,7 @@ import { routerConfig } from './index.route';
 import { runBlock } from './index.run';
 
 // Controller
+import { AmaotoController } from './controller/amaoto.controller';
 import { AuthController } from './controller/auth/auth.controller';
 import { SignInController as Auth_SignInController } from './controller/auth/sign-in/sign-in.controller';
 import { HomepageController } from './controller/homepage/homepage.controller';
@@ -19,6 +20,7 @@ import { MusicListController as Console_MusicListController } from './controller
 
 // Service
 import { AmaotoCoreService } from './service/amaoto-core/amaoto-core.service';
+import { AmaotoPlayerService } from './service/amaoto-player/amaoto-player.service';
 
 // Directive
 import { UserMenuDirective } from '../app/directive/user-menu/user-menu.directive';
@@ -26,6 +28,7 @@ import { FileUploaderDirective } from '../app/directive/uploader/file/file.direc
 import { ImageUploaderDirective } from '../app/directive/uploader/image/image.directive';
 import { MusicUploaderDirective } from '../app/directive/uploader/music/music.directive';
 import { SimplePlayerDirective } from '../app/directive/player/simple/simple.directive';
+import { V2AmaotoPlayerDirective } from '../app/directive/player/amaoto/v2/v2.directive';
 
 angular.module('amaotoNgjs', [
         'ngAnimate',
@@ -38,7 +41,8 @@ angular.module('amaotoNgjs', [
         'ui.router',
         'ngMaterial',
         'toastr',
-        'ngFileUpload'
+        'ngFileUpload',
+        'ngAudio'
     ])
     .constant('malarkey', malarkey)
     .constant('moment', moment)
@@ -46,6 +50,8 @@ angular.module('amaotoNgjs', [
     .config(routerConfig)
     .run(runBlock)
     .service('$amaotoCore', AmaotoCoreService)
+    .service('$amaotoPlayer', AmaotoPlayerService)
+    .controller('AmaotoController', AmaotoController)
     .controller('AuthController', AuthController)
     .controller('Auth_SignInController', Auth_SignInController)
     .controller('HomepageController', HomepageController)
@@ -62,4 +68,5 @@ angular.module('amaotoNgjs', [
     .directive('amaotoImageUploader', ImageUploaderDirective)
     .directive('amaotoMusicUploader', MusicUploaderDirective)
     .directive('amaotoSimplePlayer', SimplePlayerDirective)
+    .directive('amaotoV2Player', V2AmaotoPlayerDirective)
 ;

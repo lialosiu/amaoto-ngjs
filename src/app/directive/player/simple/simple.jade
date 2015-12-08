@@ -1,1 +1,6 @@
-audio
+div.simple-player
+    div.player
+        span.title {{ vm.info.title }}
+        span.track-time {{ vm.player.currentTime }}
+        button(ng-click='vm.player.play()') P
+        button(ng-click='vm.player.stop()') S

@@ -1,0 +1,19 @@
+div.amaoto-v2-player
+    div.cover
+        img(ng-src='{{ vm.$amaotoPlayer.playing.cover_thumbnail }}')
+    div.player
+        div.meta
+            span.title {{ vm.$amaotoPlayer.playing.title }}
+            span.artist {{ vm.$amaotoPlayer.playing.artist ? '&nbsp;-&nbsp;' + vm.$amaotoPlayer.playing.artist : '' }}
+        div.controller
+            div.btns
+                md-button.play(ng-click='vm.$amaotoPlayer.player.play()') P
+                md-button.play(ng-click='vm.$amaotoPlayer.player.stop()') S
+            span.title {{ vm.$amaotoPlayer.player.currentTime }}
+
+//div.simple-player
+//    div.player
+//        span.title {{ vm.info.title }}
+//        span.track-time {{ vm.player.currentTime }}
+//        button(ng-click='vm.player.play()') P
+//        button(ng-click='vm.player.stop()') S

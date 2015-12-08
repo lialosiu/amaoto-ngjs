@@ -1,4 +1,4 @@
-export function runBlock($log, $amaotoCore, $rootScope){//}), $state, $window) {
+export function runBlock($log, $amaotoCore){//}), $rootScope, $state, $window) {
     'ngInject';
 
     //todo

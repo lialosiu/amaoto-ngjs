@@ -7,7 +7,7 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
                 'top.frame': {
                     templateUrl: 'app/controller/homepage/homepage.html',
                     controller: 'HomepageController',
-                    controllerAs: 'vm'
+                    controllerAs: 'homepage'
                 }
             }
         })
@@ -38,7 +38,7 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
                 'top.frame': {
                     templateUrl: 'app/controller/console/console.html',
                     controller: 'ConsoleController',
-                    controllerAs: 'vm'
+                    controllerAs: 'console'
                 }
             },
             event: {

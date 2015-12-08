@@ -92,6 +92,39 @@ section
     overflow hidden
     border-radius 0 0 2px 2px
 
+.amaoto-v2-player
+  position fixed
+  top 0
+  left 0
+  right 0
+  .cover
+    position absolute
+    top 0
+    left 0
+    height 100px
+    width 100px
+    border-radius 0 0 5px 0
+    box-shadow 0 0 15px rgba(0 0 0 0.3)
+    overflow hidden
+    z-index 10
+    img
+      height 100%
+      width 100%
+  .player
+    position absolute
+    top 0
+    left 100px
+    right 0
+    height 40px
+    background rgba(255 255 255 0.8)
+    box-shadow 0 0 15px rgba(0 0 0 0.3)
+    .meta
+      padding 5px 10px
+      .title
+        font-size 1em
+      .artist
+        font-size 0.5em
+
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject
  *  all your stylus files automatically
