@@ -13,10 +13,12 @@ import { ConsoleController } from './controller/console/console.controller';
 import { FileUploaderDialogController as Dialog_FileUploaderDialogController } from './dialog/uploader/file/file.controller';
 import { ImageUploaderDialogController as Dialog_ImageUploaderDialogController } from './dialog/uploader/image/image.controller';
 import { MusicUploaderDialogController as Dialog_MusicUploaderDialogController } from './dialog/uploader/music/music.controller';
+import { AlbumUploaderDialogController as Dialog_AlbumUploaderDialogController } from './dialog/uploader/album/album.controller';
 import { UserListController as Console_UserListController } from './controller/console/user/list.controller';
 import { FileListController as Console_FileListController } from './controller/console/file/list/list.controller';
 import { ImageListController as Console_ImageListController } from './controller/console/image/list/list.controller';
 import { MusicListController as Console_MusicListController } from './controller/console/music/list/list.controller';
+import { AlbumListController as Console_AlbumListController } from './controller/console/album/list/list.controller';
 
 // Service
 import { AmaotoCoreService } from './service/amaoto-core/amaoto-core.service';
@@ -42,7 +44,8 @@ angular.module('amaotoNgjs', [
         'ngMaterial',
         'toastr',
         'ngFileUpload',
-        'ngAudio'
+        'ngAudio',
+        'md.data.table'
     ])
     .constant('malarkey', malarkey)
     .constant('moment', moment)
@@ -59,10 +62,12 @@ angular.module('amaotoNgjs', [
     .controller('Dialog_FileUploaderDialogController', Dialog_FileUploaderDialogController)
     .controller('Dialog_ImageUploaderDialogController', Dialog_ImageUploaderDialogController)
     .controller('Dialog_MusicUploaderDialogController', Dialog_MusicUploaderDialogController)
+    .controller('Dialog_AlbumUploaderDialogController', Dialog_AlbumUploaderDialogController)
     .controller('Console_UserListController', Console_UserListController)
     .controller('Console_FileListController', Console_FileListController)
     .controller('Console_ImageListController', Console_ImageListController)
     .controller('Console_MusicListController', Console_MusicListController)
+    .controller('Console_AlbumListController', Console_AlbumListController)
     .directive('amaotoUserMenu', UserMenuDirective)
     .directive('amaotoFileUploader', FileUploaderDirective)
     .directive('amaotoImageUploader', ImageUploaderDirective)

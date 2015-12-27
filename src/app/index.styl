@@ -6,44 +6,39 @@
 // endbower
 
 @font-face
-  font-family 'Material Icons'
-  font-style normal
-  font-weight 400
-  src url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.eot) /* For IE6-8 */
-  src local('Material Icons')
-
-,
-local('MaterialIcons-Regular')
-,
-url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.woff2) format('woff2')
-,
-url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.woff) format('woff')
-,
-url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.ttf) format('truetype')
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: local('Material Icons'),
+          local('MaterialIcons-Regular'),
+          url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.woff2) format('woff2'),
+          url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.woff) format('woff'),
+          url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.ttf) format('truetype');
 
 .material-icons
-  font-family 'Material Icons'
-  font-weight normal
-  font-style normal
-  font-size 24px /* Preferred icon size */
-  display inline-block
-  width 1em
-  height 1em
-  line-height 1
-  text-transform none
-  letter-spacing normal
-  word-wrap normal
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px; /* Preferred icon size */
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
 
   /* Support for all WebKit browsers. */
-  -webkit-font-smoothing antialiased
+  -webkit-font-smoothing: antialiased;
   /* Support for Safari and Chrome. */
-  text-rendering optimizeLegibility
+  text-rendering: optimizeLegibility;
 
   /* Support for Firefox. */
-  -moz-osx-font-smoothing grayscale
+  -moz-osx-font-smoothing: grayscale;
 
   /* Support for IE. */
-  font-feature-settings 'liga'
+  font-feature-settings: 'liga';
 
 html
   font-family "Microsoft YaHei UI", "Helvetica Neue", Helvetica, Arial, sans-serif
@@ -85,10 +80,13 @@ section
   position relative
   .file-name
     color darkred
+    padding 0 5px
   .file-size
     color orangered
+    padding 0 5px
   .file-type
     color green
+    padding 0 5px
   .file-upload-progress
     position absolute
     bottom 0
@@ -96,6 +94,21 @@ section
     right 0
     overflow hidden
     border-radius 0 0 2px 2px
+  .music-title
+    color darkred
+    padding 0 5px
+  .music-artist
+    color #007ea8
+    padding 0 5px
+  .music-bitrate
+    color #430b52
+    padding-left 5px
+  .music-playtime
+    color #a7a641
+  .image-thumb
+    height 55px
+    width auto
+
 
 .amaoto-v2-player
   position fixed
@@ -163,6 +176,37 @@ section
       .controller
         opacity 1
 
+#console
+  .amaoto-v2-player
+    z-index 20
+    .cover
+      height 140px
+      width 140px
+      border-radius 0
+    .player
+      left 140px
+
+  .console-sidebar-left
+    position fixed
+    top 140px
+    bottom 0
+    left 0
+    width 138px
+    padding-top 10px
+    background rgba(240 240 240 0.8)
+    box-shadow 0 0 10px rgba(0 0 0 0.5)
+    z-index 10
+
+  [ui-view='console.frame']
+    margin-top 64px
+    margin-left 150px
+
+  table
+    .music
+      .title
+        color #8c0000
+      .artist
+        color #007ea8
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject
  *  all your stylus files automatically

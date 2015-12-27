@@ -1,18 +1,23 @@
-md-menu
+md-menu(layout='column', layout-fill)
     md-button(ng-click='$mdOpenMenu($event)')
         md-icon account_circle
         | &nbsp;{{ vm.$amaotoCore.localData.currentUser.username }}
     md-menu-content(width='2')
-        md-menu-item
-            md-button(ng-click='vm.announceClick($index)')
+        md-menu-item(ng-show='!vm.$amaotoCore.localData.currentUser.isSignedIn')
+            md-button(ng-click='vm.$state.go("auth.sign-up")')
                 md-icon person_add
                 | 注册
-        md-menu-item
+        md-menu-item(ng-show='!vm.$amaotoCore.localData.currentUser.isSignedIn')
             md-button(ng-click='vm.$state.go("auth.sign-in")')
                 md-icon assignment_ind
                 | 登录
-        md-menu-divider
-        md-menu-item
+        md-menu-divider(ng-show='!vm.$amaotoCore.localData.currentUser.isSignedIn')
+        md-menu-item(ng-show='vm.$amaotoCore.localData.currentUser.isSignedIn')
+            md-button(ng-click='vm.$state.go("auth.sign-out")')
+                md-icon exit_to_app
+                | 登出
+        md-menu-divider(ng-show='vm.$amaotoCore.localData.currentUser.isAdministrator')
+        md-menu-item(ng-show='vm.$amaotoCore.localData.currentUser.isAdministrator')
             md-button(ng-click='vm.$state.go("console")')
                 md-icon settings_applications
                 | 管理后台

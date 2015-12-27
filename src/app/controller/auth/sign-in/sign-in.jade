@@ -1,17 +1,23 @@
 div(layout='row', layout-fill, layout-align="center center", ng-cloak)
     div(flex="20")
-    md-content.md-whiteframe-5dp(flex)
-        md-toolbar.md-primary
-            .md-toolbar-tools
-                h2.md-flex 登录
-        div(layout-padding)
-            md-input-container
-                label 用户名
-                input(ng-model='vm.user.username', type='text')
-            md-input-container
-                label 密码
-                input(ng-model='vm.user.password', type='password')
-            div(layout='row', layout-align='end center')
-                md-button.md-raised 注册
-                md-button.md-raised.md-primary(ng-click='vm.signIn()') 登录
+    form(name='signIn.signInForm', ng-submit='signIn.submit()', flex)
+        md-content.md-whiteframe-5dp
+            md-toolbar.md-primary
+                .md-toolbar-tools
+                    h2.md-flex 登录
+            div(layout-padding)
+                md-input-container
+                    label 用户名
+                    input(name='username', ng-model='signIn.form.username', type='text', required)
+                    div(ng-messages="signIn.signInForm.username.$error")
+                        div(ng-message="required") 必填
+                md-input-container
+                    label 密码
+                    input(name='password', ng-model='signIn.form.password', type='password', required, minlength="6")
+                    div(ng-messages="signIn.signInForm.password.$error")
+                        div(ng-message="required") 必填
+                        div(ng-message="minlength") 密码长度必须大于6位数
+                div(layout='row', layout-align='end center')
+                    md-button.md-raised 注册
+                    md-button.md-raised.md-primary(type='submit') 登录
     div(flex="20")

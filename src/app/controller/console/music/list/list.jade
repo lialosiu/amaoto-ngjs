@@ -1,29 +1,31 @@
-div
-    md-list
-        md-list-item.md-1-line
-            span(flex='10') ID
-            span(flex='10') 封面
-            span(flex) 歌名
-            span(flex='10') 艺术家
-            span(flex='10') 流派
-            span(flex='10') 音轨号
-            span(flex='10') 码率
-            span(flex='20')
-        md-divider
-        md-list-item.md-1-line(ng-repeat='music in vm.list')
-            span(flex='10') {{ music.id }}
-            span(flex='10')
-                div(style='margin: 0.5em 1em 0.5em 0;')
+md-data-table-toolbar
+    .md-title 音乐列表
+md-data-table-container
+    table(md-data-table, md-progress='deferred')
+        thead
+            tr
+                th(name='ID')
+                th(name='封面')
+                th(name='歌名')
+                th(name='艺术家')
+                th(name='流派')
+                th(name='音轨号')
+                th(name='码率')
+                th(name='操作')
+        tbody
+            tr.music(ng-repeat='music in list.table.data')
+                td {{ music.id }}
+                td
                     img(ng-src='{{ music.show_thumbnail_cover_url }}', style='height: 3em;')
-            span(flex) {{ music.title }}
-            span(flex='10') {{ music.artist }}
-            span(flex='10') {{ music.genre }}
-            span(flex='10') {{ music.track }}
-            span(flex='10') {{ music.bitrate_4_display }}
-            span(flex='20')
-                amaoto-simple-player(ng-src='{{ music.show_url }}')
+                td.title {{ music.title }}
+                td.artist {{ music.artist }}
+                td {{ music.genre }}
+                td {{ music.track }}
+                td {{ music.bitrate_4_display }}
+                td
+                    md-button.md-raised(ng-click='list.$amaotoPlayer.loadMusicAndPlay(music)') 播放
+md-data-table-pagination(md-label='list.table.paginationLabel', md-page='list.table.currentPage', md-limit='list.table.perPage', md-total='{{ list.table.total }}', md-trigger='list.onPaginationChange')
+
 
 div
-    md-button(ng-click='vm.prevPage()') prev
-    md-button(ng-click='vm.nextPage()') next
-    md-button(ng-click='vm.showUploadDialog($event)') 上传文件
+    md-button(ng-click='list.showUploadDialog($event)') 上传文件

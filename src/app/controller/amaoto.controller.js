@@ -6,7 +6,5 @@ export class AmaotoController {
         this.toastr = toastr;
         this.$timeout = $timeout;
         this.$amaotoCore = $amaotoCore;
-
-        this.t = '1';
     }
 }

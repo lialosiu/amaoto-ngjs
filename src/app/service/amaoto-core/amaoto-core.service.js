@@ -21,6 +21,8 @@ export class AmaotoCoreService {
         this.API_GET_MUSIC_PAGINATE = 'api/music/paginate';
         this.API_POST_MUSIC_UPLOAD = 'api/music/upload';
         this.API_GET_MUSIC_UPLOADED_SIZE = 'api/music/uploaded-size';
+        this.API_GET_ALBUM_PAGINATE = 'api/album/paginate';
+        this.API_POST_ALBUM_CREATE = 'api/album/create';
 
 
         this.xdebugKey = undefined;
@@ -71,6 +73,66 @@ export class AmaotoCoreService {
         this.xdebugKey = key;
     }
 
+    doGet(url, thenCallback, catchCallback) {
+        if (!thenCallback) {
+            let self = this;
+            thenCallback = (rsp)=> {
+                self.$log.debug(rsp);
+                self.$mdDialog.show(this.$mdDialog.alert({
+                    title: '提示',
+                    content: rsp.data.message,
+                    ok: '确认'
+                }));
+                return rsp;
+            }
+        }
+        if (!catchCallback) {
+            let self = this;
+            catchCallback = (e)=> {
+                self.$log.debug(e);
+                self.$mdDialog.show(this.$mdDialog.alert({
+                    title: '提示',
+                    content: e.status > 0 ? e.data.message : '连接服务器失败',
+                    ok: '确认'
+                }));
+                return e;
+            }
+        }
+        return this.$http.get(url)
+            .then(thenCallback)
+            .catch(catchCallback);
+    }
+
+    doPost(url, data, thenCallback, catchCallback) {
+        if (!thenCallback) {
+            let self = this;
+            thenCallback = (rsp)=> {
+                self.$log.debug(rsp);
+                self.$mdDialog.show(this.$mdDialog.alert({
+                    title: '提示',
+                    content: rsp.data.message,
+                    ok: '确认'
+                }));
+                return rsp;
+            }
+        }
+        if (!catchCallback) {
+            let self = this;
+            catchCallback = (e)=> {
+                self.$log.debug(e);
+                self.$mdDialog.show(this.$mdDialog.alert({
+                    title: '提示',
+                    content: e.data.message,
+                    ok: '确认'
+                }));
+                return e;
+            }
+        }
+        return this.$http.post(url, data)
+            .then(thenCallback)
+            .catch(catchCallback);
+    }
+
     connectToServer() {
         return this.getSystemInfo().then(()=> {
             return this.getCurrentUser().then();
@@ -78,83 +140,81 @@ export class AmaotoCoreService {
     }
 
     getSystemInfo() {
-        return this.$http.get(this.url(this.API_GET_SYSTEM_INFO))
-            .then((response)=> {
-                let rsp = angular.fromJson(response.data);
-                this.localData.serverInfo.siteName = rsp.data.site_name;
-                this.localData.serverInfo.poweredName = rsp.data.powered_name;
-                this.localData.serverInfo.version = rsp.data.version;
-                return rsp;
-            });
+        return this.doGet(this.url(this.API_GET_SYSTEM_INFO), (response)=> {
+            let rsp = angular.fromJson(response.data);
+            this.localData.serverInfo.siteName = rsp.data.site_name;
+            this.localData.serverInfo.poweredName = rsp.data.powered_name;
+            this.localData.serverInfo.version = rsp.data.version;
+            return rsp;
+        });
     }
 
     doSignIn(loginId, password) {
-        return this.$http.post(this.url(this.API_POST_AUTH_SIGN_IN), {
-                'login_id': loginId,
-                'password': password
-            })
-            .then((response)=> {
-                let rsp = angular.fromJson(response.data);
-                this.$log.debug(rsp);
-                this.localData.currentUser.username = rsp.data.username;
-                this.localData.currentUser.isSignedIn = true;
-                return rsp;
-            }).catch((e)=> {
-                this.$log.debug(e);
-                this.$mdDialog.show(this.$mdDialog.alert({
-                    title: '登录失败',
-                    content: e.data.message,
-                    ok: '确认'
-                }));
-            });
+        let self = this;
+        return self.doPost(self.url(self.API_POST_AUTH_SIGN_IN), {
+            'login_id': loginId,
+            'password': password
+        }, (response)=> {
+            let result = angular.fromJson(response.data);
+            let data = result.data;
+            self.localData.currentUser.username = data.username;
+            self.localData.currentUser.isSignedIn = true;
+            self.localData.currentUser.isMaster = data.is_master;
+            self.localData.currentUser.isAdministrator = data.is_administrator;
+            self.toastr.info(result.message);
+            self.toastr.info('已登录账号[' + self.localData.currentUser.username + ']');
+            return response;
+        });
     }
 
     getCurrentUser() {
-        return this.$http.get(this.url(this.API_GET_AUTH_CURRENT_USER))
-            .then((response)=> {
-                let rsp = angular.fromJson(response.data);
-                this.$log.debug(rsp);
-                if (rsp.data && rsp.data.username) {
-                    this.localData.currentUser.username = rsp.data.username;
-                    this.localData.currentUser.isSignedIn = true;
-                }
-                return rsp;
-            });
+        let self = this;
+        return self.doGet(self.url(self.API_GET_AUTH_CURRENT_USER), (response)=> {
+            let result = angular.fromJson(response.data);
+            let data = result.data;
+            if (data && data.username) {
+                self.localData.currentUser.username = data.username;
+                self.localData.currentUser.isSignedIn = true;
+                self.localData.currentUser.isMaster = data.is_master;
+                self.localData.currentUser.isAdministrator = data.is_administrator;
+            } else {
+                self.localData.currentUser.username = '游客';
+                self.localData.currentUser.isSignedIn = false;
+                self.localData.currentUser.isMaster = false;
+                self.localData.currentUser.isAdministrator = false;
+            }
+            return response;
+        });
     }
 
     getUserPaginate(page = 1, num = 15) {
-        return this.$http.get(this.url(this.API_GET_USER_PAGINATE + '?page=' + page + '&num=' + num))
-            .then((response)=> {
-                let rsp = angular.fromJson(response.data);
-                this.$log.debug(rsp);
-                return rsp;
-            });
+        return this.doGet(this.url(this.API_GET_USER_PAGINATE + '?page=' + page + '&num=' + num), (response)=> {
+            return angular.fromJson(response.data);
+        });
     }
 
     getFilePaginate(page = 1, num = 15) {
-        return this.$http.get(this.url(this.API_GET_FILE_PAGINATE + '?page=' + page + '&num=' + num))
-            .then((response)=> {
-                let rsp = angular.fromJson(response.data);
-                this.$log.debug(rsp);
-                return rsp;
-            });
+        return this.doGet(this.url(this.API_GET_FILE_PAGINATE + '?page=' + page + '&num=' + num), (response)=> {
+            return angular.fromJson(response.data);
+        });
     }
 
     getImagePaginate(page = 1, num = 15) {
-        return this.$http.get(this.url(this.API_GET_IMAGE_PAGINATE + '?page=' + page + '&num=' + num))
-            .then((response)=> {
-                let rsp = angular.fromJson(response.data);
-                this.$log.debug(rsp);
-                return rsp;
-            });
+        return this.doGet(this.url(this.API_GET_IMAGE_PAGINATE + '?page=' + page + '&num=' + num), (response)=> {
+            return angular.fromJson(response.data);
+        });
     }
 
     getMusicPaginate(page = 1, num = 15) {
-        return this.$http.get(this.url(this.API_GET_MUSIC_PAGINATE + '?page=' + page + '&num=' + num))
-            .then((response)=> {
-                let rsp = angular.fromJson(response.data);
-                this.$log.debug(rsp);
-                return rsp;
-            });
+        return this.doGet(this.url(this.API_GET_MUSIC_PAGINATE + '?page=' + page + '&num=' + num), (response)=> {
+            return angular.fromJson(response.data);
+        });
+    }
+
+    getAlbumPaginate(page = 1, num = 15) {
+        return this.doGet(this.url(this.API_GET_ALBUM_PAGINATE + '?page=' + page + '&num=' + num), (response)=> {
+            this.$log.debug(response);
+            return angular.fromJson(response.data);
+        })
     }
 }

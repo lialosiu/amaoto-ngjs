@@ -21,7 +21,7 @@ export class HomepageController {
     }
 
     showP() {
-        let audio = this.$amaotoPlayer.player.audio;
+        //let audio = this.$amaotoPlayer.player.audio;
         this.$log.debug(this.$amaotoPlayer.player);
     }
 }

@@ -1,45 +1,45 @@
 export class MusicListController {
-    constructor($log, toastr, $amaotoCore, $state, $mdDialog) {
+    constructor($log, toastr, $amaotoCore, $amaotoPlayer, $state, $mdDialog) {
         'ngInject';
 
         this.$log = $log;
         this.toastr = toastr;
         this.$amaotoCore = $amaotoCore;
+        this.$amaotoPlayer = $amaotoPlayer;
         this.$state = $state;
         this.$mdDialog = $mdDialog;
 
-        this.list = undefined;
-        this.page = undefined;
-        this.perPage = undefined;
-        this.lastPage = undefined;
+        this.table = {};
+        this.table.data = undefined;
+        this.table.currentPage = undefined;
+        this.table.perPage = undefined;
+        this.table.lastPage = undefined;
+        this.table.total = undefined;
+        this.table.paginationLabel = {};
+        this.table.paginationLabel.text = '每页行数';
+        this.table.paginationLabel.of = '共';
 
         this.changePage(1, 15);
+
+        this.onPaginationChange = (page, limit) => {
+            return this.changePage(page, limit);
+        };
     }
 
     changePage(page = 1, perPage = this.perPage) {
         this.$amaotoCore.getMusicPaginate(page, perPage).then((rsp)=> {
             let lists = rsp.data;
 
-            this.list = lists.data;
-            this.page = lists.current_page;
-            this.perPage = lists.per_page;
-            this.lastPage = lists.last_page;
+            this.table.data = lists.data;
+            this.table.currentPage = lists.current_page;
+            this.table.perPage = lists.per_page;
+            this.table.lastPage = lists.last_page;
+            this.table.total = lists.total;
+
+            return rsp;
         });
     }
 
-    prevPage() {
-        if (this.page <= 1)
-            this.toastr.error('已经是第一页');
-        else
-            this.changePage(this.page - 1)
-    }
-
-    nextPage() {
-        if (this.page >= this.lastPage)
-            this.toastr.error('已经是最后一页');
-        else
-            this.changePage(this.page + 1)
-    }
 
     showUploadDialog(ev) {
         this.$mdDialog.show({

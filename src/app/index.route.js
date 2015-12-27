@@ -4,7 +4,7 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
         .state('homepage', {
             url: '/',
             views: {
-                'top.frame': {
+                'root.frame': {
                     templateUrl: 'app/controller/homepage/homepage.html',
                     controller: 'HomepageController',
                     controllerAs: 'homepage'
@@ -14,10 +14,10 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
         .state('auth', {
             url: '/auth',
             views: {
-                'top.frame': {
-                    templateUrl: 'app/view/auth.html',
+                'root.frame': {
+                    templateUrl: 'app/controller/auth/auth.html',
                     controller: 'AuthController',
-                    controllerAs: 'vm'
+                    controllerAs: 'auth'
                 }
             },
             abstract: true
@@ -26,24 +26,24 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
             url: '/sign-in',
             views: {
                 'auth.frame': {
-                    templateUrl: 'app/view/auth/sign-in.html',
+                    templateUrl: 'app/controller/auth/sign-in/sign-in.html',
                     controller: 'Auth_SignInController',
-                    controllerAs: 'vm'
+                    controllerAs: 'signIn'
                 }
             }
         })
         .state('console', {
             url: '/console',
             views: {
-                'top.frame': {
+                'root.frame': {
                     templateUrl: 'app/controller/console/console.html',
                     controller: 'ConsoleController',
                     controllerAs: 'console'
                 }
             },
-            event: {
-                '$stateChangeStart': [
-                    'NotAdminRedirectToSignIn'
+            data: {
+                middleware: [
+                    'admin'
                 ]
             }
         })
@@ -62,7 +62,7 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
                 'console.user.frame@console.user': {
                     templateUrl: 'app/controller/console/user/list.html',
                     controller: 'Console_UserListController',
-                    controllerAs: 'vm'
+                    controllerAs: 'list'
                 }
             }
         })
@@ -82,7 +82,7 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
                 'console.file.frame@console.file': {
                     templateUrl: 'app/controller/console/file/list/list.html',
                     controller: 'Console_FileListController',
-                    controllerAs: 'vm'
+                    controllerAs: 'list'
                 }
             }
         })
@@ -102,7 +102,7 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
                 'console.image.frame@console.image': {
                     templateUrl: 'app/controller/console/image/list/list.html',
                     controller: 'Console_ImageListController',
-                    controllerAs: 'vm'
+                    controllerAs: 'list'
                 }
             }
         })
@@ -122,10 +122,31 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
                 'console.music.frame@console.music': {
                     templateUrl: 'app/controller/console/music/list/list.html',
                     controller: 'Console_MusicListController',
-                    controllerAs: 'vm'
+                    controllerAs: 'list'
                 }
             }
         })
+        .state('console.album', {
+            url: '/album',
+            views: {
+                'console.frame@console': {
+                    template: '<div ui-view="console.album.frame">'
+                }
+            },
+            abstract: true
+        })
+        .state('console.album.list', {
+            url: '/list',
+
+            views: {
+                'console.album.frame@console.album': {
+                    templateUrl: 'app/controller/console/album/list/list.html',
+                    controller: 'Console_AlbumListController',
+                    controllerAs: 'list'
+                }
+            }
+        })
+
     ;
 
     $urlRouterProvider.otherwise('/');

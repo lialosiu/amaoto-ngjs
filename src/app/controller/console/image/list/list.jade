@@ -1,22 +1,24 @@
-div
-    md-list
-        md-list-item.md-1-line
-            span(flex='10') ID
-            span(flex='20') 预览图
-            span(flex='10') 宽
-            span(flex='10') 高
-            span(flex='20') 创建时间
-        md-divider
-        md-list-item.md-1-line(ng-repeat='image in vm.list')
-            span(flex='10') {{ image.id }}
-            div(flex='20')
-                div(style='height: 4em; margin: 0.5em 2em 0.5em 0; overflow: hidden;')
-                    img(ng-src='{{ image.show_thumbnail_url }}', width='100', ng-click='vm.showPreviewImageDialog($event, image.show_high_resolution_url)')
-            span(flex='10') {{ image.width }}
-            span(flex='10') {{ image.height }}
-            span(flex='20') {{ image.created_at }}
+md-data-table-toolbar
+    .md-title 图片列表
+md-data-table-container
+    table(md-data-table, md-progress='deferred')
+        thead
+            tr
+                th(name='ID')
+                th(name='预览图')
+                th(name='宽')
+                th(name='高')
+                th(name='创建时间')
+        tbody
+            tr(ng-repeat='image in list.table.data')
+                td {{ image.id }}
+                td
+                    div(style='height: 4em; margin: 0.5em 2em 0.5em 0; overflow: hidden;')
+                        img(ng-src='{{ image.show_thumbnail_url }}', width='100', ng-click='list.showPreviewImageDialog($event, image.show_high_resolution_url)')
+                td {{ image.width }}
+                td {{ image.height }}
+                td {{ image.created_at }}
+md-data-table-pagination(md-label='list.table.paginationLabel', md-page='list.table.currentPage', md-limit='list.table.perPage', md-total='{{ list.table.total }}', md-trigger='list.onPaginationChange')
 
 div
-    md-button(ng-click='vm.prevPage()') prev
-    md-button(ng-click='vm.nextPage()') next
-    md-button(ng-click='vm.showUploadDialog($event)') 上传文件
+    md-button(ng-click='list.showUploadDialog($event)') 上传文件

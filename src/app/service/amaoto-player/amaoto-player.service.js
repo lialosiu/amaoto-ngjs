@@ -10,16 +10,19 @@ export class AmaotoPlayerService {
 
         this.player = undefined;
         this.playing = {};
-        this.playing.title = undefined;
+        this.playing.title = 'Nothing Playing';
         this.playing.artist = undefined;
+        this.playing.cover_thumbnail = 'assets/images/no-cover-300.jpg'
     }
 
     loadMusic(music) {
+
+        this.$log.debug(music);
         this.playing.title = music.title;
         this.playing.artist = music.artist;
-        this.playing.cover_thumbnail = music.show_thumbnail_cover_url;
+        this.playing.cover_thumbnail = music.show_thumbnail_cover_url ? music.show_thumbnail_cover_url : 'assets/images/no-cover.jpg';
         this.playing.url = music.show_url;
-        if (typeof this.player != 'undefined'){
+        if (typeof this.player != 'undefined') {
             this.player.stop();
             this.$log.debug('stop');
         }

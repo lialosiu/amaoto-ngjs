@@ -1,10 +1,11 @@
-export class FileListController {
-    constructor($log, toastr, $amaotoCore, $state, $mdDialog) {
+export class AlbumListController {
+    constructor($log, toastr, $amaotoCore, $amaotoPlayer, $state, $mdDialog) {
         'ngInject';
 
         this.$log = $log;
         this.toastr = toastr;
         this.$amaotoCore = $amaotoCore;
+        this.$amaotoPlayer = $amaotoPlayer;
         this.$state = $state;
         this.$mdDialog = $mdDialog;
 
@@ -18,7 +19,6 @@ export class FileListController {
         this.table.paginationLabel.text = '每页行数';
         this.table.paginationLabel.of = '共';
 
-
         this.changePage(1, 15);
 
         this.onPaginationChange = (page, limit) => {
@@ -26,8 +26,8 @@ export class FileListController {
         };
     }
 
-    changePage(page = 1, perPage = this.table.perPage) {
-        return this.$amaotoCore.getFilePaginate(page, perPage).then((rsp)=> {
+    changePage(page = 1, perPage = this.perPage) {
+        this.$amaotoCore.getAlbumPaginate(page, perPage).then((rsp)=> {
             let lists = rsp.data;
 
             this.table.data = lists.data;
@@ -40,14 +40,26 @@ export class FileListController {
         });
     }
 
+
     showUploadDialog(ev) {
         this.$mdDialog.show({
-            templateUrl: 'app/dialog/uploader/file/file.html',
-            controller: 'Dialog_FileUploaderDialogController',
+            templateUrl: 'app/dialog/uploader/album/album.html',
+            controller: 'Dialog_AlbumUploaderDialogController',
             controllerAs: 'vm',
-            //parent: angular.element(ev.target),
             targetEvent: ev,
             clickOutsideToClose: true
         });
     }
+
+    //showPreviewImageDialog(ev, imageSrc) {
+    //    this.$mdDialog.show({
+    //        template: '<img src="' + imageSrc + '" width="100%">',
+    //        controller: ()=> {
+    //        },
+    //        controllerAs: 'vm',
+    //        //parent: angular.element(ev.target),
+    //        targetEvent: ev,
+    //        clickOutsideToClose: true
+    //    });
+    //}
 }
