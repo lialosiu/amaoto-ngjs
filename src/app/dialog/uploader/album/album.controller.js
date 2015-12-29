@@ -68,7 +68,6 @@ export class AlbumUploaderDialogController {
                     case 'audio':
                     case 'video':
                         file.status = 'uploaded.music';
-                        angular.fromJson(file.uploaded.tags);
                         self.form.title = file.uploaded.album_title;
                         self.form.artist = file.uploaded.album_artist;
                         self.form.year = file.uploaded.year;

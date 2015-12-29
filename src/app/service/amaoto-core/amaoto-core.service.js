@@ -7,7 +7,7 @@ export class AmaotoCoreService {
         this.$timeout = $timeout;
         this.$mdDialog = $mdDialog;
 
-        this.API_HOST = 'http://amaoto-core.localhost/';
+        this.API_HOST = 'http://amaoto-core.homestead.lialosiu.com/';
         this.API_GET_SYSTEM_INFO = 'api/system/info';
         this.API_POST_AUTH_SIGN_IN = 'api/auth/sign-in';
         this.API_GET_AUTH_CURRENT_USER = 'api/auth/current-user';

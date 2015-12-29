@@ -23,7 +23,12 @@ md-data-table-container
                 td {{ music.track }}
                 td {{ music.bitrate_4_display }}
                 td
-                    md-button.md-raised(ng-click='list.$amaotoPlayer.loadMusicAndPlay(music)') 播放
+                    md-button.md-icon-button(ng-click='list.$amaotoPlayer.loadMusicAndPlay(music)')
+                        md-icon play_arrow
+                    md-button.md-icon-button(ng-click='list.$amaotoPlayer.loadMusicAndPlay(music)')
+                        md-icon edit
+                    md-button.md-icon-button(ng-click='list.$amaotoPlayer.loadMusicAndPlay(music)')
+                        md-icon delete
 md-data-table-pagination(md-label='list.table.paginationLabel', md-page='list.table.currentPage', md-limit='list.table.perPage', md-total='{{ list.table.total }}', md-trigger='list.onPaginationChange')
 
 

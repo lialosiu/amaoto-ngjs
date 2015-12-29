@@ -28,7 +28,6 @@ import { AmaotoPlayerService } from './service/amaoto-player/amaoto-player.servi
 import { UserMenuDirective } from '../app/directive/user-menu/user-menu.directive';
 import { FileUploaderDirective } from '../app/directive/uploader/file/file.directive';
 import { ImageUploaderDirective } from '../app/directive/uploader/image/image.directive';
-import { MusicUploaderDirective } from '../app/directive/uploader/music/music.directive';
 import { SimplePlayerDirective } from '../app/directive/player/simple/simple.directive';
 import { V2AmaotoPlayerDirective } from '../app/directive/player/amaoto/v2/v2.directive';
 
@@ -71,7 +70,6 @@ angular.module('amaotoNgjs', [
     .directive('amaotoUserMenu', UserMenuDirective)
     .directive('amaotoFileUploader', FileUploaderDirective)
     .directive('amaotoImageUploader', ImageUploaderDirective)
-    .directive('amaotoMusicUploader', MusicUploaderDirective)
     .directive('amaotoSimplePlayer', SimplePlayerDirective)
     .directive('amaotoV2Player', V2AmaotoPlayerDirective)
 ;
