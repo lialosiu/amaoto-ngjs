@@ -69,7 +69,10 @@ export class AlbumUploaderDialogController {
                     case 'video':
                         file.status = 'uploaded.music';
                         self.form.title = file.uploaded.album_title;
-                        self.form.artist = file.uploaded.album_artist;
+                        if (file.uploaded.album_artist)
+                            self.form.artist = file.uploaded.album_artist;
+                        else if (!self.form.artist && file.uploaded.artist)
+                            self.form.artist = file.uploaded.artist;
                         self.form.year = file.uploaded.year;
                         self.form.genre = file.uploaded.genre;
                         self.form.musics.push(file.uploaded.id);
