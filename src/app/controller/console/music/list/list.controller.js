@@ -52,6 +52,21 @@ export class MusicListController {
         });
     }
 
+    showMusicEditorDialog(music, ev) {
+        this.$mdDialog.show({
+            templateUrl: 'app/dialog/editor/music/music.html',
+            controller: 'MusicEditorDialogController',
+            controllerAs: 'vm',
+            //parent: angular.element(ev.target),
+            targetEvent: ev,
+            clickOutsideToClose: true,
+            bindToController: true,
+            locals: {
+                music: music
+            }
+        });
+    }
+
     //showPreviewImageDialog(ev, imageSrc) {
     //    this.$mdDialog.show({
     //        template: '<img src="' + imageSrc + '" width="100%">',

@@ -21,6 +21,7 @@ export class AmaotoCoreService {
         this.API_GET_MUSIC_PAGINATE = 'api/music/paginate';
         this.API_POST_MUSIC_UPLOAD = 'api/music/upload';
         this.API_GET_MUSIC_UPLOADED_SIZE = 'api/music/uploaded-size';
+        this.API_POST_MUSIC_EDIT = 'api/music/edit';
         this.API_GET_ALBUM_PAGINATE = 'api/album/paginate';
         this.API_POST_ALBUM_CREATE = 'api/album/create';
 

@@ -1,0 +1,31 @@
+md-dialog(aria-label='Music Editor Dialog', flex)
+    form(name='vm.musicForm', ng-submit='vm.submit()')
+        md-toolbar.md-toolbar-tools
+            h2 音乐修改
+            span(flex)
+            md-button.md-icon-button(type='button', ng-click='vm.cancel()')
+                md-icon close
+        md-dialog-content.md-dialog-content(layout-gt-md='row')
+            div(layout='column', layout-align='top center', layout-padding)
+                img.md-whiteframe-2dp(ng-src='{{ vm.music.show_thumbnail_cover_url }}')
+            div(layout='column', flex)
+                div(layout-gt-md='row')
+                    md-input-container(flex)
+                        label 歌名
+                        input(name='title', ng-model='vm.form.title', type='text', required)
+                        div(ng-messages="vm.musicForm.title.$error")
+                            div(ng-message="required") 必填
+                    md-input-container(flex)
+                        label 艺术家
+                        input(name='artist', ng-model='vm.form.artist', type='text')
+                div(layout-gt-md='row')
+                    md-input-container(flex)
+                        label 发行时间
+                        input(name='year', ng-model='vm.form.year', type='text')
+                    md-input-container(flex)
+                        label 流派
+                        input(name='genre', ng-model='vm.form.genre', type='text')
+
+        md-dialog-actions.md-actions(layout='row')
+            md-button.md-raised.md-primary(type='submit')
+                | 确定
