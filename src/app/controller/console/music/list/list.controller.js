@@ -67,15 +67,17 @@ export class MusicListController {
         });
     }
 
-    //showPreviewImageDialog(ev, imageSrc) {
-    //    this.$mdDialog.show({
-    //        template: '<img src="' + imageSrc + '" width="100%">',
-    //        controller: ()=> {
-    //        },
-    //        controllerAs: 'vm',
-    //        //parent: angular.element(ev.target),
-    //        targetEvent: ev,
-    //        clickOutsideToClose: true
-    //    });
-    //}
+    showMusicDeleteDialog(music, ev) {
+        let self = this;
+        let confirm = self.$mdDialog.confirm()
+            .title('删除确认')
+            .content(music.title + '<br><small>' + music.artist + '</small>')
+            .clickOutsideToClose(true)
+            .targetEvent(ev)
+            .ok('删除')
+            .cancel('取消');
+        self.$mdDialog.show(confirm).then(()=> {
+            self.$amaotoCore.doPost(self.$amaotoCore.url(self.$amaotoCore.API_POST_MUSIC_DELETE + '/' + music.id), {});
+        });
+    }
 }

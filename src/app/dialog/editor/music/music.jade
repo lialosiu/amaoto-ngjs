@@ -25,6 +25,15 @@ md-dialog(aria-label='Music Editor Dialog', flex)
                     md-input-container(flex)
                         label 流派
                         input(name='genre', ng-model='vm.form.genre', type='text')
+                md-input-container(flex)
+                    label 播放时长
+                    input(name='playtime', value='{{ vm.music.playtime * 1000 | amDateFormat:"mm:ss" }}', type='text', disabled)
+                md-input-container(flex)
+                    label 码率
+                    input(name='bitrate_4_display', ng-model='vm.music.bitrate_4_display', type='text', disabled)
+                md-input-container(flex)
+                    label 音轨号
+                    input(name='track', ng-model='vm.music.track', type='text', disabled)
 
         md-dialog-actions.md-actions(layout='row')
             md-button.md-raised.md-primary(type='submit')

@@ -1,12 +1,53 @@
 md-dialog(aria-label='Image Uploader Dialog', flex)
-    form
-        md-toolbar.md-toolbar-tools
-            h2 图片上传
-            span(flex)
-            md-button.md-icon-button(ng-click='vm.cancel()')
-                md-icon close
-        md-dialog-content.md-dialog-content
-            amaoto-image-uploader
-        md-dialog-actions.md-actions(layout='row')
-            md-button
-                | 确定
+    md-toolbar.md-toolbar-tools
+        h2 图片上传
+        span(flex)
+        md-button.md-icon-button(ng-click='vm.cancel()')
+            md-icon close
+    md-dialog-content.md-dialog-content
+        md-list
+            md-list-item(ng-repeat='file in vm.files', ng-switch='file.status')
+                md-card.file-list(layout='column', layout-padding, layout-fill, ng-switch-when='added')
+                    div(layout='row', layout-align='space-between', layout-fill)
+                        div.file-name(flex) {{ file.name }}
+                        div.file-size
+                            small {{ file.size }}
+                    div(layout='row')
+                        div.file-type(flex)
+                            small {{ file.mime }}
+                        div.file-status
+                            small 待上传
+                md-card.file-list(layout='column', layout-padding, layout-fill, ng-switch-when='uploading')
+                    div(layout='row', layout-align='space-between', layout-fill)
+                        div.file-name(flex) {{ file.name }}
+                        div.file-size
+                            small {{ file.size }}
+                    div(layout='row')
+                        div.file-type(flex)
+                            small {{ file.mime }}
+                        div.file-status
+                            small 正在上传
+                    md-progress-linear.file-upload-progress(md-mode='determinate', value='{{ file.uploadProgress }}')
+                md-card.file-list(layout='row', layout-padding, layout-fill, ng-switch-when='uploaded.image')
+                    img.image-thumb(ng-src='{{ file.uploaded.show_thumbnail_url }}')
+                    div(layout='column', flex)
+                        div(layout='row', layout-fill)
+                            div.file-name {{ file.uploaded.file.name }}
+                            div.image-w-h
+                                small {{ file.uploaded.width }}x{{ file.uploaded.height }}
+                            div(flex)
+                            div.file-size
+                                small {{ file.size }}
+                        div(layout='row')
+                            div.file-type
+                                small {{ file.uploaded.file.mime }}
+                            div(flex)
+                            div.file-status
+                                small 上传完成
+    md-dialog-actions.md-actions(layout='row')
+        md-button.md-raised(ngf-select, ng-model='vm.addedFiles', ngf-change='vm.added()', ngf-multiple='true', ngf-max-size='20MB', ngf-pattern='image/*')
+            | 选择文件
+        md-button.md-raised.md-warn(ng-click='vm.upload()')
+            | 开始上传
+        md-button.md-raised.md-primary(ng-click='vm.cancel()')
+            | 确定

@@ -47,9 +47,9 @@ md-dialog(aria-label='Music Uploader Dialog', flex)
                             div.file-status
                                 small 上传完成
     md-dialog-actions.md-actions(layout='row')
-        md-button.md-raised(ngf-select, ng-model='vm.addedFiles', ngf-change='vm.added()', ngf-multiple='true', ngf-max-size='20MB')
+        md-button.md-raised(ngf-select, ng-model='vm.addedFiles', ngf-change='vm.added()', ngf-multiple='true', ngf-max-size='20MB', ngf-pattern='audio/*')
             | 选择文件
-        md-button.md-raised.md-warn(flex = 1, ng-click='vm.upload()')
+        md-button.md-raised.md-warn(ng-click='vm.upload()')
             | 开始上传
-        md-button.md-raised.md-primary(ng-click='vm.close()')
+        md-button.md-raised.md-primary(ng-click='vm.cancel()')
             | 确定

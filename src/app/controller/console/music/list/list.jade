@@ -9,7 +9,7 @@ md-data-table-container
                 th(name='歌名')
                 th(name='艺术家')
                 th(name='流派')
-                th(name='音轨号')
+                th(name='时长')
                 th(name='码率')
                 th(name='操作')
         tbody
@@ -20,14 +20,14 @@ md-data-table-container
                 td.title {{ music.title }}
                 td.artist {{ music.artist }}
                 td {{ music.genre }}
-                td {{ music.track }}
+                td {{ music.playtime * 1000 | amDateFormat:"mm:ss" }}
                 td {{ music.bitrate_4_display }}
                 td
                     md-button.md-icon-button(ng-click='list.$amaotoPlayer.loadMusicAndPlay(music)')
                         md-icon play_arrow
                     md-button.md-icon-button(ng-click='list.showMusicEditorDialog(music, $event)')
                         md-icon edit
-                    md-button.md-icon-button(ng-click='list.$amaotoPlayer.loadMusicAndPlay(music)')
+                    md-button.md-icon-button(ng-click='list.showMusicDeleteDialog(music, $event)')
                         md-icon delete
 md-data-table-pagination(md-label='list.table.paginationLabel', md-page='list.table.currentPage', md-limit='list.table.perPage', md-total='{{ list.table.total }}', md-trigger='list.onPaginationChange')
 

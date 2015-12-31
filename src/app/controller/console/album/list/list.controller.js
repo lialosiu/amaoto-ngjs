@@ -47,7 +47,7 @@ export class AlbumListController {
             controller: 'Dialog_AlbumUploaderDialogController',
             controllerAs: 'vm',
             targetEvent: ev,
-            clickOutsideToClose: true
+            clickOutsideToClose: false
         });
     }
 

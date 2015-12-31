@@ -27,9 +27,6 @@ import { AmaotoPlayerService } from './service/amaoto-player/amaoto-player.servi
 
 // Directive
 import { UserMenuDirective } from '../app/directive/user-menu/user-menu.directive';
-import { FileUploaderDirective } from '../app/directive/uploader/file/file.directive';
-import { ImageUploaderDirective } from '../app/directive/uploader/image/image.directive';
-import { SimplePlayerDirective } from '../app/directive/player/simple/simple.directive';
 import { V2AmaotoPlayerDirective } from '../app/directive/player/amaoto/v2/v2.directive';
 
 angular.module('amaotoNgjs', [
@@ -45,7 +42,8 @@ angular.module('amaotoNgjs', [
         'toastr',
         'ngFileUpload',
         'ngAudio',
-        'md.data.table'
+        'md.data.table',
+        'angularMoment'
     ])
     .constant('malarkey', malarkey)
     .constant('moment', moment)
@@ -70,8 +68,5 @@ angular.module('amaotoNgjs', [
     .controller('Console_MusicListController', Console_MusicListController)
     .controller('Console_AlbumListController', Console_AlbumListController)
     .directive('amaotoUserMenu', UserMenuDirective)
-    .directive('amaotoFileUploader', FileUploaderDirective)
-    .directive('amaotoImageUploader', ImageUploaderDirective)
-    .directive('amaotoSimplePlayer', SimplePlayerDirective)
     .directive('amaotoV2Player', V2AmaotoPlayerDirective)
 ;
