@@ -77,7 +77,7 @@ export class MusicListController {
             .ok('删除')
             .cancel('取消');
         self.$mdDialog.show(confirm).then(()=> {
-            self.$amaotoCore.doPost(self.$amaotoCore.url(self.$amaotoCore.API_POST_MUSIC_DELETE + '/' + music.id), {});
+            self.$amaotoCore.doPost(self.$amaotoCore.url(self.$amaotoCore.API_POST_MUSIC_DELETE, {musicId: music.id}), {});
         });
     }
 }

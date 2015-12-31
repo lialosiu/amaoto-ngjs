@@ -1,0 +1,54 @@
+md-dialog(aria-label='Album Editor Dialog', flex)
+    form(name='vm.albumForm', ng-submit='vm.submit()')
+        md-toolbar.md-toolbar-tools
+            h2 专辑修改
+            span(flex)
+            md-button.md-icon-button(type='button', ng-click='vm.cancel()')
+                md-icon close
+        md-dialog-content.md-dialog-content(layout='column')
+            div(layout='row')
+                div(layout-padding, style='width: 130px')
+                    img.md-whiteframe-2dp(ng-src='{{ vm.form.cover_thumbnail }}', layout-fill)
+                div(layout='column', flex)
+                    div(layout-gt-md='row')
+                        md-input-container(flex)
+                            label 专辑名
+                            input(name='title', ng-model='vm.form.title', type='text', required)
+                            div(ng-messages="vm.createAlbumForm.title.$error")
+                                div(ng-message="required") 必填
+                        md-input-container(flex)
+                            label 艺术家
+                            input(name='artist', ng-model='vm.form.artist', type='text')
+                    div(layout-gt-md='row')
+                        md-input-container(flex)
+                            label 年份
+                            input(name='year', ng-model='vm.form.year', type='text')
+                        md-input-container(flex)
+                            label 流派
+                            input(name='genre', ng-model='vm.form.genre', type='text')
+            md-data-table-container
+                table(md-data-table)
+                    thead
+                        tr
+                            th(name='ID')
+                            th(name='歌名')
+                            th(name='艺术家')
+                            th(name='时长')
+                            th(name='码率')
+                            th(name='操作')
+                    tbody
+                        tr.music(ng-repeat='music in vm.form.musics')
+                            td {{ music.id }}
+                            td.title {{ music.title }}
+                            td {{ music.artist }}
+                            td {{ music.playtime * 1000 | amDateFormat:"mm:ss" }}
+                            td {{ music.bitrate_4_display }}
+                            td
+                                md-button.md-icon-button(type='button', ng-click='vm.$amaotoPlayer.loadMusicAndPlay(music)')
+                                    md-icon play_arrow
+                                md-button.md-icon-button(type='button', ng-click='vm.removeMusic(music)')
+                                    md-icon delete
+
+        md-dialog-actions.md-actions(layout='row')
+            md-button.md-raised.md-primary(type='submit')
+                | 确定

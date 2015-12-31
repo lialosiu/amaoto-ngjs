@@ -15,6 +15,7 @@ import { ImageUploaderDialogController as Dialog_ImageUploaderDialogController }
 import { MusicUploaderDialogController as Dialog_MusicUploaderDialogController } from './dialog/uploader/music/music.controller';
 import { AlbumUploaderDialogController as Dialog_AlbumUploaderDialogController } from './dialog/uploader/album/album.controller';
 import { MusicEditorDialogController } from './dialog/editor/music/music.controller';
+import { AlbumEditorDialogController } from './dialog/editor/album/album.controller';
 import { UserListController as Console_UserListController } from './controller/console/user/list.controller';
 import { FileListController as Console_FileListController } from './controller/console/file/list/list.controller';
 import { ImageListController as Console_ImageListController } from './controller/console/image/list/list.controller';
@@ -62,6 +63,7 @@ angular.module('amaotoNgjs', [
     .controller('Dialog_MusicUploaderDialogController', Dialog_MusicUploaderDialogController)
     .controller('Dialog_AlbumUploaderDialogController', Dialog_AlbumUploaderDialogController)
     .controller('MusicEditorDialogController', MusicEditorDialogController)
+    .controller('AlbumEditorDialogController', AlbumEditorDialogController)
     .controller('Console_UserListController', Console_UserListController)
     .controller('Console_FileListController', Console_FileListController)
     .controller('Console_ImageListController', Console_ImageListController)

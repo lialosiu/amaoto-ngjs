@@ -21,7 +21,8 @@ md-data-table-container
                 td {{ album.genre }}
                 td {{ album.music_count }}
                 td
-                    md-button.md-raised(ng-click='') 详情
+                    md-button.md-icon-button(ng-click='list.showAlbumEditorDialog(album, $event)')
+                        md-icon edit
 md-data-table-pagination(md-label='list.table.paginationLabel', md-page='list.table.currentPage', md-limit='list.table.perPage', md-total='{{ list.table.total }}', md-trigger='list.onPaginationChange')
 
 

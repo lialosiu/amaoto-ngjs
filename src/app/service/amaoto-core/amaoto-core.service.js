@@ -21,10 +21,11 @@ export class AmaotoCoreService {
         this.API_GET_MUSIC_PAGINATE = 'api/music/paginate';
         this.API_POST_MUSIC_UPLOAD = 'api/music/upload';
         this.API_GET_MUSIC_UPLOADED_SIZE = 'api/music/uploaded-size';
-        this.API_POST_MUSIC_EDIT = 'api/music/edit';
-        this.API_POST_MUSIC_DELETE = 'api/music/delete';
+        this.API_POST_MUSIC_EDIT = 'api/music/edit/{musicId}';
+        this.API_POST_MUSIC_DELETE = 'api/music/delete/{musicId}';
         this.API_GET_ALBUM_PAGINATE = 'api/album/paginate';
         this.API_POST_ALBUM_CREATE = 'api/album/create';
+        this.API_POST_ALBUM_EDIT = 'api/album/edit/{albumId}';
 
 
         this.xdebugKey = undefined;
@@ -60,15 +61,22 @@ export class AmaotoCoreService {
         });
     }
 
-    url(url) {
-        url = this.API_HOST + url;
-        if (this.xdebugKey) {
-            if (url.indexOf('?') == -1)
-                url = url + '?XDEBUG_SESSION_START=' + this.xdebugKey;
-            else
-                url = url + '&XDEBUG_SESSION_START=' + this.xdebugKey;
+    url(url, objs) {
+        let afterUrl = url;
+        if (objs) for (let key in objs) {
+            if (!objs.hasOwnProperty(key)) continue;
+            let value = objs[key];
+            afterUrl = afterUrl.replace('{' + key + '}', value);
         }
-        return url;
+        if (this.xdebugKey) {
+            if (afterUrl.indexOf('?') == -1)
+                afterUrl = afterUrl + '?XDEBUG_SESSION_START=' + this.xdebugKey;
+            else
+                afterUrl = afterUrl + '&XDEBUG_SESSION_START=' + this.xdebugKey;
+        }
+        afterUrl = this.API_HOST + afterUrl;
+        this.$log.debug(afterUrl);
+        return afterUrl;
     }
 
     xdebug(key) {

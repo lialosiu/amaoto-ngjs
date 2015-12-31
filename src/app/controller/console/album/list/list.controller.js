@@ -51,6 +51,20 @@ export class AlbumListController {
         });
     }
 
+    showAlbumEditorDialog(album, ev) {
+        this.$mdDialog.show({
+            templateUrl: 'app/dialog/editor/album/album.html',
+            controller: 'AlbumEditorDialogController',
+            controllerAs: 'vm',
+            targetEvent: ev,
+            clickOutsideToClose: true,
+            bindToController: true,
+            locals: {
+                album: album
+            }
+        });
+    }
+
     //showPreviewImageDialog(ev, imageSrc) {
     //    this.$mdDialog.show({
     //        template: '<img src="' + imageSrc + '" width="100%">',

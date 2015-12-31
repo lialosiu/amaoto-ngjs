@@ -18,7 +18,7 @@ export class MusicEditorDialogController {
 
     submit() {
         let self = this;
-        this.$amaotoCore.doPost(this.$amaotoCore.url(self.$amaotoCore.API_POST_MUSIC_EDIT + '/' + self.music.id), {
+        this.$amaotoCore.doPost(this.$amaotoCore.url(self.$amaotoCore.API_POST_MUSIC_EDIT, {musicId: self.music.id}), {
             title: self.form.title,
             artist: self.form.artist,
             year: self.form.year,
