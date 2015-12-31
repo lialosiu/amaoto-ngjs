@@ -32,17 +32,28 @@ export class MusicUploaderDialogController {
 
     upload() {
         let self = this;
+
         for (let file of self.files) {
             if (file.status != 'added') continue;
 
             file.status = 'uploading';
             file.uploadProgress = 0;
+
+            let data = {
+                file: file.data,
+                uniName: file.uniName
+            };
+
+            if (self.album && self.album.id)
+                data = {
+                    file: file.data,
+                    uniName: file.uniName,
+                    albumId: self.album.id
+                };
+
             this.Upload.upload({
                 url: self.$amaotoCore.url(self.$amaotoCore.API_POST_MUSIC_UPLOAD),
-                data: {
-                    'file': file.data,
-                    'uniName': file.uniName
-                },
+                data: data,
                 resumeSizeUrl: self.$amaotoCore.url(self.$amaotoCore.API_GET_MUSIC_UPLOADED_SIZE + '?uniName=' + file.uniName),
                 resumeChunkSize: '2MB'
             }).then(function (resp) {

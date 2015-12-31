@@ -65,15 +65,17 @@ export class AlbumListController {
         });
     }
 
-    //showPreviewImageDialog(ev, imageSrc) {
-    //    this.$mdDialog.show({
-    //        template: '<img src="' + imageSrc + '" width="100%">',
-    //        controller: ()=> {
-    //        },
-    //        controllerAs: 'vm',
-    //        //parent: angular.element(ev.target),
-    //        targetEvent: ev,
-    //        clickOutsideToClose: true
-    //    });
-    //}
+    showAlbumUploadNewMusicDialog(album, ev) {
+        this.$mdDialog.show({
+            templateUrl: 'app/dialog/uploader/music/music.html',
+            controller: 'Dialog_MusicUploaderDialogController',
+            controllerAs: 'vm',
+            targetEvent: ev,
+            clickOutsideToClose: false,
+            bindToController: true,
+            locals: {
+                album: album
+            }
+        });
+    }
 }

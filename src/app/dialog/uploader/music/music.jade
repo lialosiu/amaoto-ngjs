@@ -1,6 +1,9 @@
 md-dialog(aria-label='Music Uploader Dialog', flex)
     md-toolbar.md-toolbar-tools
         h2 音乐上传
+            span(ng-show='vm.album')
+                small &nbsp;至专辑&nbsp;
+                    span [{{ vm.album.title }}]
         span(flex)
         md-button.md-icon-button(ng-click='vm.cancel()')
             md-icon close

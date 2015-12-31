@@ -33,6 +33,7 @@ md-dialog(aria-label='Album Editor Dialog', flex)
                             th(name='ID')
                             th(name='歌名')
                             th(name='艺术家')
+                            th(name='音轨')
                             th(name='时长')
                             th(name='码率')
                             th(name='操作')
@@ -41,6 +42,7 @@ md-dialog(aria-label='Album Editor Dialog', flex)
                             td {{ music.id }}
                             td.title {{ music.title }}
                             td {{ music.artist }}
+                            td {{ music.track }}
                             td {{ music.playtime * 1000 | amDateFormat:"mm:ss" }}
                             td {{ music.bitrate_4_display }}
                             td
