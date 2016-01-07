@@ -1,11 +1,32 @@
 export function routerConfig($stateProvider, $urlRouterProvider) {
     'ngInject';
     $stateProvider
-        .state('homepage', {
+        .state('start', {
             url: '/',
             views: {
                 'root.frame': {
-                    templateUrl: 'app/controller/homepage/homepage.html',
+                    templateUrl: 'app/controller/home/home.html',
+                    controller: 'HomeController',
+                    controllerAs: 'home'
+                }
+            }
+        })
+        .state('home', {
+            url: '/home',
+            views: {
+                'root.frame': {
+                    templateUrl: 'app/controller/home/home.html',
+                    controller: 'HomeController',
+                    controllerAs: 'home'
+                }
+            },
+            abstract: true
+        })
+        .state('home.homepage', {
+            url: '/homepage',
+            views: {
+                'home.frame': {
+                    templateUrl: 'app/controller/home/homepage/homepage.html',
                     controller: 'HomepageController',
                     controllerAs: 'homepage'
                 }

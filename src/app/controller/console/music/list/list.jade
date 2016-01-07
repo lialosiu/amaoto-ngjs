@@ -1,5 +1,6 @@
 md-data-table-toolbar
     .md-title 音乐列表
+        md-button(ng-click='list.showUploadDialog($event)') 上传文件
 md-data-table-container
     table(md-data-table, md-progress='deferred')
         thead
@@ -16,7 +17,7 @@ md-data-table-container
             tr.music(ng-repeat='music in list.table.data')
                 td {{ music.id }}
                 td
-                    img(ng-src='{{ music.show_thumbnail_cover_url }}', style='height: 3em;')
+                    img(ng-src='{{ music.show_thumbnail_cover_url || "assets/images/no-cover-300.jpg" }}', style='height: 3em;')
                 td.title {{ music.title }}
                 td.artist {{ music.artist }}
                 td {{ music.genre }}
@@ -30,7 +31,3 @@ md-data-table-container
                     md-button.md-icon-button(ng-click='list.showMusicDeleteDialog(music, $event)')
                         md-icon delete
 md-data-table-pagination(md-label='list.table.paginationLabel', md-page='list.table.currentPage', md-limit='list.table.perPage', md-total='{{ list.table.total }}', md-trigger='list.onPaginationChange')
-
-
-div
-    md-button(ng-click='list.showUploadDialog($event)') 上传文件

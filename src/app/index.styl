@@ -177,6 +177,31 @@ section
       .controller
         opacity 1
 
+#home
+  .amaoto-v2-player
+    z-index 20
+    .cover
+      height 140px
+      width 140px
+      border-radius 0
+    .player
+      left 140px
+
+  .home-sidebar-left
+    position fixed
+    top 140px
+    bottom 0
+    left 0
+    width 138px
+    padding-top 10px
+    background rgba(240 240 240 0.8)
+    box-shadow 0 0 10px rgba(0 0 0 0.5)
+    z-index 10
+
+  [ui-view='home.frame']
+    margin-top 64px
+    margin-left 150px
+
 #console
   .amaoto-v2-player
     z-index 20

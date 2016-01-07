@@ -1,5 +1,6 @@
 md-data-table-toolbar
     .md-title 图片列表
+        md-button(ng-click='list.showUploadDialog($event)') 上传文件
 md-data-table-container
     table(md-data-table, md-progress='deferred')
         thead
@@ -19,6 +20,3 @@ md-data-table-container
                 td {{ image.height }}
                 td {{ image.created_at }}
 md-data-table-pagination(md-label='list.table.paginationLabel', md-page='list.table.currentPage', md-limit='list.table.perPage', md-total='{{ list.table.total }}', md-trigger='list.onPaginationChange')
-
-div
-    md-button(ng-click='list.showUploadDialog($event)') 上传文件
