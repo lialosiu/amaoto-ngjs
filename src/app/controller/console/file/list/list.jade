@@ -1,18 +1,18 @@
-md-data-table-toolbar
+md-table-toolbar
     .md-title 文件列表
         md-button(ng-click='list.showUploadDialog($event)') 上传文件
-md-data-table-container
-    table(md-data-table, md-progress='deferred')
-        thead
-            tr
-                th(name='ID')
-                th(name='文件名')
-                th(name='MIME')
-                th(name='创建时间')
-        tbody
-            tr(ng-repeat='file in list.table.data')
-                td {{ file.id }}
-                td {{ file.name }}
-                td {{ file.mime }}
-                td {{ file.created_at }}
-md-data-table-pagination(md-label='list.table.paginationLabel', md-page='list.table.currentPage', md-limit='list.table.perPage', md-total='{{ list.table.total }}', md-trigger='list.onPaginationChange')
+md-table-container
+    table(md-table, md-progress='list.table.promise')
+        thead(md-head)
+            tr(md-row)
+                th(md-column) ID
+                th(md-column) 文件名
+                th(md-column) MIME
+                th(md-column) 创建时间
+        tbody(md-body)
+            tr(md-row, ng-repeat='file in list.table.data')
+                td(md-cell) {{ file.id }}
+                td(md-cell) {{ file.name }}
+                td(md-cell) {{ file.mime }}
+                td(md-cell) {{ file.created_at }}
+md-table-pagination(md-page-select, md-boundary-links, md-label='{page: "页码", rowsPerPage: "每页行数", of: "共"}', md-page='list.table.currentPage', md-limit='list.table.perPage', md-total='{{ list.table.total }}', md-on-paginate='list.onPaginationChange')

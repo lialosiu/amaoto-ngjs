@@ -6,11 +6,11 @@ md-dialog(aria-label='Album Editor Dialog', flex)
             md-button.md-icon-button(type='button', ng-click='vm.cancel()')
                 md-icon close
         md-dialog-content.md-dialog-content(layout='column')
-            div(layout='row')
-                div(layout-padding, style='width: 130px')
-                    img.md-whiteframe-2dp(ng-src='{{ vm.form.cover_thumbnail }}', layout-fill)
+            div(layout='row', layout-padding)
+                div(layout='column', layout-align='center center')
+                    img.md-whiteframe-2dp(ng-src='{{ vm.form.cover_thumbnail }}', layout-fill, style='width: 130px')
                 div(layout='column', flex)
-                    div(layout-gt-md='row')
+                    div(layout='row')
                         md-input-container(flex)
                             label 专辑名
                             input(name='title', ng-model='vm.form.title', type='text', required)
@@ -19,38 +19,38 @@ md-dialog(aria-label='Album Editor Dialog', flex)
                         md-input-container(flex)
                             label 艺术家
                             input(name='artist', ng-model='vm.form.artist', type='text')
-                    div(layout-gt-md='row')
+                    div(layout='row')
                         md-input-container(flex)
                             label 年份
                             input(name='year', ng-model='vm.form.year', type='text')
                         md-input-container(flex)
                             label 流派
                             input(name='genre', ng-model='vm.form.genre', type='text')
-            md-data-table-container
-                table(md-data-table)
-                    thead
-                        tr
-                            th(name='ID')
-                            th(name='歌名')
-                            th(name='艺术家')
-                            th(name='音轨')
-                            th(name='时长')
-                            th(name='码率')
-                            th(name='操作')
-                    tbody
-                        tr.music(ng-repeat='music in vm.form.musics')
-                            td {{ music.id }}
-                            td.title {{ music.title }}
-                            td {{ music.artist }}
-                            td {{ music.track }}
-                            td {{ music.playtime * 1000 | amDateFormat:"mm:ss" }}
-                            td {{ music.bitrate_4_display }}
-                            td
+            md-table-container
+                table(md-table)
+                    thead(md-head)
+                        tr(md-row)
+                            th(md-column) ID
+                            th(md-column) 歌名
+                            th(md-column) 艺术家
+                            th(md-column) 音轨
+                            th(md-column) 时长
+                            th(md-column) 码率
+                            th(md-column) 操作
+                    tbody(md-body)
+                        tr.music(md-row, ng-repeat='music in vm.form.musics')
+                            td(md-cell) {{ music.id }}
+                            td.title(md-cell) {{ music.title }}
+                            td(md-cell) {{ music.artist }}
+                            td(md-cell) {{ music.track }}
+                            td(md-cell) {{ music.playtime * 1000 | amDateFormat:"mm:ss" }}
+                            td(md-cell) {{ music.bitrate_4_display }}
+                            td(md-cell)
                                 md-button.md-icon-button(type='button', ng-click='vm.$amaotoPlayer.loadMusicAndPlay(music)')
                                     md-icon play_arrow
                                 md-button.md-icon-button(type='button', ng-click='vm.removeMusic(music)')
                                     md-icon delete
 
-        md-dialog-actions.md-actions(layout='row')
+        md-dialog-actions(layout='row')
             md-button.md-raised.md-primary(type='submit')
                 | 确定

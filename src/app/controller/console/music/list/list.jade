@@ -1,33 +1,33 @@
-md-data-table-toolbar
+md-table-toolbar
     .md-title 音乐列表
-        md-button(ng-click='list.showUploadDialog($event)') 上传文件
-md-data-table-container
-    table(md-data-table, md-progress='deferred')
-        thead
-            tr
-                th(name='ID')
-                th(name='封面')
-                th(name='歌名')
-                th(name='艺术家')
-                th(name='流派')
-                th(name='时长')
-                th(name='码率')
-                th(name='操作')
-        tbody
-            tr.music(ng-repeat='music in list.table.data')
-                td {{ music.id }}
-                td
+        md-button(ng-click='list.showUploadDialog($event)') 上传音乐
+md-table-container
+    table(md-table, md-progress='list.table.promise')
+        thead(md-head)
+            tr(md-row)
+                th(md-column) ID
+                th(md-column) 封面
+                th(md-column) 歌名
+                th(md-column) 艺术家
+                th(md-column) 流派
+                th(md-column) 时长
+                th(md-column) 码率
+                th(md-column) 操作
+        tbody(md-body)
+            tr.music(md-row, ng-repeat='music in list.table.data')
+                td(md-cell) {{ music.id }}
+                td(md-cell)
                     img(ng-src='{{ music.show_thumbnail_cover_url || "assets/images/no-cover-300.jpg" }}', style='height: 3em;')
-                td.title {{ music.title }}
-                td.artist {{ music.artist }}
-                td {{ music.genre }}
-                td {{ music.playtime * 1000 | amDateFormat:"mm:ss" }}
-                td {{ music.bitrate_4_display }}
-                td
+                td.title(md-cell) {{ music.title }}
+                td.artist(md-cell) {{ music.artist }}
+                td(md-cell) {{ music.genre }}
+                td(md-cell) {{ music.playtime * 1000 | amDateFormat:"mm:ss" }}
+                td(md-cell) {{ music.bitrate_4_display }}
+                td(md-cell)
                     md-button.md-icon-button(ng-click='list.$amaotoPlayer.loadMusicAndPlay(music)')
                         md-icon play_arrow
                     md-button.md-icon-button(ng-click='list.showMusicEditorDialog(music, $event)')
                         md-icon edit
                     md-button.md-icon-button(ng-click='list.showMusicDeleteDialog(music, $event)')
                         md-icon delete
-md-data-table-pagination(md-label='list.table.paginationLabel', md-page='list.table.currentPage', md-limit='list.table.perPage', md-total='{{ list.table.total }}', md-trigger='list.onPaginationChange')
+md-table-pagination(md-page-select, md-boundary-links, md-label='{page: "页码", rowsPerPage: "每页行数", of: "共"}', md-page='list.table.currentPage', md-limit='list.table.perPage', md-total='{{ list.table.total }}', md-on-paginate='list.onPaginationChange')

@@ -13,9 +13,7 @@ export class UserListController {
         this.table.perPage = undefined;
         this.table.lastPage = undefined;
         this.table.total = undefined;
-        this.table.paginationLabel = {};
-        this.table.paginationLabel.text = '每页行数';
-        this.table.paginationLabel.of = '共';
+        this.table.promise = undefined;
 
         this.changePage(1, 15);
 

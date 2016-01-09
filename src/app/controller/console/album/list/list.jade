@@ -1,29 +1,29 @@
-md-data-table-toolbar
+md-table-toolbar
     .md-title 专辑列表
         md-button(ng-click='list.showUploadDialog($event)') 上传专辑
-md-data-table-container
-    table(md-data-table, md-progress='deferred')
-        thead
-            tr
-                th(name='ID')
-                th(name='封面')
-                th(name='专辑名')
-                th(name='艺术家')
-                th(name='流派')
-                th(name='音乐数')
-                th(name='操作')
-        tbody
-            tr.music(ng-repeat='album in list.table.data')
-                td {{ album.id }}
-                td
-                    img(ng-src='{{ album.show_thumbnail_cover_url }}', style='height: 3em;')
-                td.title {{ album.title }}
-                td.artist {{ album.artist }}
-                td {{ album.genre }}
-                td {{ album.music_count }}
-                td
-                    md-button.md-icon-button(ng-click='list.showAlbumUploadNewMusicDialog(album, $event)')
-                        md-icon add
-                    md-button.md-icon-button(ng-click='list.showAlbumEditorDialog(album, $event)')
-                        md-icon edit
-md-data-table-pagination(md-label='list.table.paginationLabel', md-page='list.table.currentPage', md-limit='list.table.perPage', md-total='{{ list.table.total }}', md-trigger='list.onPaginationChange')
+md-table-container
+    table(md-table, md-progress='list.table.promise')
+        thead(md-head)
+            tr(md-row)
+                th(md-column) ID
+                th(md-column) 封面
+                th(md-column) 专辑名
+                th(md-column) 艺术家
+                th(md-column) 流派
+                th(md-column) 音乐数
+                th(md-column) 操作
+            tbody(md-body)
+                tr.music(md-row,ng-repeat='album in list.table.data')
+                    td(md-cell) {{ album.id }}
+                    td(md-cell)
+                        img(ng-src='{{ album.show_thumbnail_cover_url }}', style='height: 3em;')
+                    td.title(md-cell) {{ album.title }}
+                    td.artist(md-cell) {{ album.artist }}
+                    td(md-cell) {{ album.genre }}
+                    td(md-cell) {{ album.music_count }}
+                    td(md-cell)
+                        md-button.md-icon-button(ng-click='list.showAlbumUploadNewMusicDialog(album, $event)')
+                            md-icon add
+                        md-button.md-icon-button(ng-click='list.showAlbumEditorDialog(album, $event)')
+                            md-icon edit
+md-table-pagination(md-page-select, md-boundary-links, md-label='{page: "页码", rowsPerPage: "每页行数", of: "共"}', md-page='list.table.currentPage', md-limit='list.table.perPage', md-total='{{ list.table.total }}', md-on-paginate='list.onPaginationChange')

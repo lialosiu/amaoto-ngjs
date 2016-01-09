@@ -38,7 +38,6 @@ import { V2AmaotoPlayerDirective } from '../app/directive/player/amaoto/v2/v2.di
 angular.module('amaotoNgjs', [
         'ngAnimate',
         'ngCookies',
-        'ngTouch',
         'ngSanitize',
         'ngMessages',
         'ngAria',
