@@ -8,6 +8,8 @@ div.amaoto-v2-player
             md-progress-linear.progress.md-warn(md-mode='{{ vm.$amaotoPlayer.player.canPlay ? "buffer": "indeterminate" }}', value='{{ vm.$amaotoPlayer.player.progress * 100 }}', md-buffer-value='{{ vm.$amaotoPlayer.player.audio.buffered.length > 0 ? vm.$amaotoPlayer.player.audio.buffered.end(vm.$amaotoPlayer.player.audio.buffered.length - 1) / vm.$amaotoPlayer.player.audio.duration * 100 : 0 }}')
             md-slider.progress-setter.md-warn(aria-label='progress', ng-model='vm.$amaotoPlayer.player.progress', min='0', max='1', step='0.001')
         div.controller
+            div.playlist
+                div 123
             div.btns
                 md-button.md-fab.md-mini.md-warn(ng-click='vm.$amaotoPlayer.player.play()')
                     md-icon play_arrow

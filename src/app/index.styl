@@ -110,7 +110,6 @@ section
     height 55px
     width auto
 
-
 .amaoto-v2-player
   position fixed
   top 0
@@ -171,13 +170,20 @@ section
         .progress-setter
           opacity 1
     .controller
-      transition opacity 0.3s
-      opacity 0
-    &:hover
-      .controller
-        opacity 1
+      background rgba(255 255 255 .7)
+      box-shadow 2px 2px 15px rgba(0 0 0 .3)
+      overflow hidden
+      .playlist
+        min-height 400px
+        margin 30px
+    //  transition opacity 0.3s
+    //  opacity 0
+    //&:hover
+    //  .controller
+    //    opacity 1
 
 #home
+  background-image url(../assets/images/bg.gif)
   .amaoto-v2-player
     z-index 20
     .cover
@@ -196,7 +202,7 @@ section
     padding-top 10px
     background rgba(240 240 240 0.8)
     box-shadow 0 0 10px rgba(0 0 0 0.5)
-    z-index 10
+    z-index 20
 
   [ui-view='home.frame']
     margin-top 64px
@@ -233,6 +239,45 @@ section
         color #8c0000
       .artist
         color #007ea8
+
+md-grid-tile.album
+  box-shadow 0 0 3px rgba(0 0 0 0.3)
+  md-grid-tile-footer
+    text-align center
+    background rgba(0 0 0 0.5)
+
+md-grid-list
+  &.music, &.album
+    md-grid-tile
+      box-shadow 0 0 3px rgba(0 0 0 0.5)
+      background-size cover
+      background-position center
+      md-grid-tile-header
+        & > figcaption
+          width 100%
+        text-shadow 0 0 3px rgba(255 255 255 .5)
+        background rgba(0 0 0 .5)
+      .meta
+        overflow hidden
+        margin .5em
+        & > *
+          white-space nowrap
+          overflow hidden
+          text-overflow ellipsis
+        .title
+          font-size 1em
+          color #fcff9b
+        .artist
+          font-size 0.8em
+      .active-mask
+        background rgba(0 0 0 .3)
+        position absolute
+        top 0
+        bottom 0
+        left 0
+        right 0
+
+
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject
  *  all your stylus files automatically

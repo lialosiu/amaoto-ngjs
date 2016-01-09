@@ -1,10 +1,11 @@
 export class AmaotoController {
-    constructor($log, toastr, $timeout, $amaotoCore) {
+    constructor($log, toastr, $amaotoCore, $amaotoPlayer) {
         'ngInject';
 
         this.$log = $log;
         this.toastr = toastr;
-        this.$timeout = $timeout;
         this.$amaotoCore = $amaotoCore;
+        this.$amaotoPlayer = $amaotoPlayer;
+
     }
 }
