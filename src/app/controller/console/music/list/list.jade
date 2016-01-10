@@ -24,7 +24,7 @@ md-table-container
                 td(md-cell) {{ music.playtime * 1000 | amDateFormat:"mm:ss" }}
                 td(md-cell) {{ music.bitrate_4_display }}
                 td(md-cell)
-                    md-button.md-icon-button(ng-click='list.$amaotoPlayer.loadMusicAndPlay(music)')
+                    md-button.md-icon-button(ng-click='list.$amaotoPlayer.insertMusicToPlaylist(music, true)')
                         md-icon play_arrow
                     md-button.md-icon-button(ng-click='list.showMusicEditorDialog(music, $event)')
                         md-icon edit

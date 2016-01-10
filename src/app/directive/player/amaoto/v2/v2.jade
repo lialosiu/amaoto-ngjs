@@ -8,6 +8,21 @@ div.amaoto-v2-player
             md-progress-linear.progress.md-warn(md-mode='{{ vm.$amaotoPlayer.player.audio.readyState >= 3 ? "buffer": "query" }}', value='{{ vm.$amaotoPlayer.player.playedProgress }}', md-buffer-value='{{ vm.$amaotoPlayer.player.bufferedProgress }}')
             md-slider.progress-setter.md-warn(aria-label='progress', ng-model='vm.$amaotoPlayer.player.audio.currentTime', min='0', max='{{ vm.$amaotoPlayer.player.audio.duration }}', step='1')
         div.controller
+            div.main-btns(layout='row', layout-padding)
+                md-button.md-fab.md-mini.md-warn(ng-click='vm.$amaotoPlayer.play()')
+                    md-icon play_arrow
+                md-button.md-fab.md-mini.md-warn(ng-click='vm.$amaotoPlayer.pause()')
+                    md-icon pause
+                md-button.md-fab.md-mini.md-warn(ng-click='vm.$amaotoPlayer.stop()')
+                    md-icon stop
+                md-button.md-fab.md-mini.md-warn(ng-click='vm.$amaotoPlayer.prev()')
+                    md-icon skip_previous
+                md-button.md-fab.md-mini.md-warn(ng-click='vm.$amaotoPlayer.next()')
+                    md-icon skip_next
+                div(flex)
+                div(flex='20', layout='row')
+                    md-icon.md-accent volume_up
+                    md-slider.md-accent(flex, aria-label='volume', ng-model='vm.$amaotoPlayer.player.audio.volume', min='0', max='1', step='0.1')
             md-content.playlist
                 md-list
                     md-list-item.row(layout='row', ng-repeat='music in vm.$amaotoPlayer.playlist track by $index', ng-class='music.status')
@@ -22,14 +37,14 @@ div.amaoto-v2-player
                                 md-icon clear
                             md-button.md-icon-button(href="{{ music.download_url }}" target="_blank")
                                 md-icon file_download
-            div.btns(layout='row', layout-padding)
-                md-button.md-fab.md-mini.md-warn(ng-click='vm.$amaotoPlayer.play()')
-                    md-icon play_arrow
-                md-button.md-fab.md-mini.md-warn(ng-click='vm.$amaotoPlayer.pause()')
-                    md-icon pause
-                md-button.md-fab.md-mini.md-warn(ng-click='vm.$amaotoPlayer.stop()')
-                    md-icon stop
-                md-button.md-fab.md-mini.md-warn(ng-click='vm.$amaotoPlayer.prev()')
-                    md-icon skip_previous
-                md-button.md-fab.md-mini.md-warn(ng-click='vm.$amaotoPlayer.next()')
-                    md-icon skip_next
+            div.sub-btns(layout='row', layout-padding)
+                md-button.md-raised.md-primary(ng-click='vm.$amaotoPlayer.changeLoopType()', ng-switch='vm.$amaotoPlayer.player.loopType')
+                    md-icon(ng-switch-when='queue') queue_music
+                    span(ng-switch-when='queue') 顺序播放
+                    md-icon(ng-switch-when='loop') loop
+                    span(ng-switch-when='loop') 洗脑循环
+                    md-icon(ng-switch-when='shuffle') shuffle
+                    span(ng-switch-when='shuffle') 乱序播放
+                md-button.md-raised.md-primary(ng-click='vm.$amaotoPlayer.emptyPlaylist()')
+                    md-icon delete
+                    span 清空播放列表

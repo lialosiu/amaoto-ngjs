@@ -12,6 +12,7 @@ export class AmaotoPlayerService {
         this.player.audio.crossOrigin = "anonymous";
         this.player.dancer = new $window.Dancer();
         this.player.dancer.load(this.player.audio);
+        this.player.loopType = 'queue';
 
         this.ready();
         this.playlist = [];
@@ -100,21 +101,56 @@ export class AmaotoPlayerService {
 
     prev() {
         let current = this.playlist.indexOf(this.playing);
-        if (current == 0)
+
+        let index = undefined;
+        switch (this.player.loopType) {
+            case 'queue':
+                if (current == 0)
+                    index = -1;
+                else
+                    index = current - 1;
+                break;
+            case'loop':
+                index = current;
+                break;
+            case 'shuffle':
+                index = parseInt(Math.random() * (this.playlist.length), 10);
+                break;
+        }
+
+
+        if (index == -1)
             return false;
 
-        this.loadMusic(this.playlist[current - 1]);
+        this.loadMusic(this.playlist[index]);
         this.play();
         return true
     }
 
     next() {
         let current = this.playlist.indexOf(this.playing);
-        let total = this.playlist.length;
-        if (current + 1 == total)
+
+        let index = undefined;
+        switch (this.player.loopType) {
+            case 'queue':
+                if (current + 1 == this.playlist.length)
+                    index = -1;
+                else
+                    index = current + 1;
+                break;
+            case'loop':
+                index = current;
+                break;
+            case 'shuffle':
+                index = parseInt(Math.random() * (this.playlist.length), 10);
+                break;
+        }
+
+
+        if (index == -1)
             return false;
 
-        this.loadMusic(this.playlist[current + 1]);
+        this.loadMusic(this.playlist[index]);
         this.play();
         return true
     }
@@ -122,5 +158,23 @@ export class AmaotoPlayerService {
     ready() {
         this.playing = {};
         this.playing.title = 'Nothing Playing';
+    }
+
+    emptyPlaylist() {
+        this.playlist = [];
+    }
+
+    changeLoopType() {
+        switch (this.player.loopType) {
+            case 'queue':
+                this.player.loopType = 'loop';
+                break;
+            case'loop':
+                this.player.loopType = 'shuffle';
+                break;
+            case 'shuffle':
+                this.player.loopType = 'queue';
+                break;
+        }
     }
 }

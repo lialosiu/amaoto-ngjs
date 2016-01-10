@@ -118,8 +118,6 @@ section
     height 55px
     width auto
 
-
-
 @keyframes amaoto-v2-player-playing-blink
   0%
     background rgba(57, 252, 36, 0.1)
@@ -188,12 +186,14 @@ section
       overflow hidden
       height 0
       transition height 0.3s
+      .main-btns, .sub-btns
+        padding 20px 30px
       .playlist
         background rgba(255 255 255 .9)
         border-radius 3px
         box-shadow 0 0 2px rgba(0 0 0 .3)
         height 400px
-        margin 30px
+        margin 5px 30px
         .row
           padding 0 20px
           &.played
@@ -216,15 +216,17 @@ section
       .progress-setter
         opacity 1
       .controller
-        height 550px
-    //  transition opacity 0.3s
-    //  opacity 0
-    //&:hover
-    //  .controller
-    //    opacity 1
+        height 600px
+
+//  transition opacity 0.3s
+//  opacity 0
+//&:hover
+//  .controller
+//    opacity 1
 
 #home
-  background-image url(../assets/images/bg.gif)
+  min-height 100%
+  background url(../assets/images/bg.gif) repeat
   .amaoto-v2-player
     z-index 20
     .cover
@@ -242,7 +244,7 @@ section
     width 138px
     padding-top 10px
     background rgba(240 240 240 0.8)
-    box-shadow 2px 0 10px rgba(0 0 0 0.5)
+    box-shadow 0 2px 10px rgba(0 0 0 0.5)
     z-index 20
 
   [ui-view='home.frame']
@@ -317,7 +319,6 @@ md-grid-list
         bottom 0
         left 0
         right 0
-
 
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject

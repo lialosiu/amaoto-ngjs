@@ -46,7 +46,7 @@ md-dialog(aria-label='Album Editor Dialog', flex)
                             td(md-cell) {{ music.playtime * 1000 | amDateFormat:"mm:ss" }}
                             td(md-cell) {{ music.bitrate_4_display }}
                             td(md-cell)
-                                md-button.md-icon-button(type='button', ng-click='vm.$amaotoPlayer.loadMusicAndPlay(music)')
+                                md-button.md-icon-button(type='button', ng-click='vm.$amaotoPlayer.insertMusicToPlaylist(music, true)')
                                     md-icon play_arrow
                                 md-button.md-icon-button(type='button', ng-click='vm.removeMusic(music)')
                                     md-icon delete
