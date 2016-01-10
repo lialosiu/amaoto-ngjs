@@ -38,7 +38,7 @@ div.amaoto-v2-player
                             md-button.md-icon-button(href="{{ music.download_url }}" target="_blank")
                                 md-icon file_download
             div.sub-btns(layout='row', layout-padding)
-                md-button.md-raised.md-primary(ng-click='vm.$amaotoPlayer.changeLoopType()', ng-switch='vm.$amaotoPlayer.player.loopType')
+                md-button.md-raised.md-primary(aria-label='loop-type',ng-click='vm.$amaotoPlayer.changeLoopType()', ng-switch='vm.$amaotoPlayer.player.loopType')
                     md-icon(ng-switch-when='queue') queue_music
                     span(ng-switch-when='queue') 顺序播放
                     md-icon(ng-switch-when='loop') loop

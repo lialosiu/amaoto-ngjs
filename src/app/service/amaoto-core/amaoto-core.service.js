@@ -23,6 +23,7 @@ export class AmaotoCoreService {
         this.API_GET_MUSIC_UPLOADED_SIZE = 'api/music/uploaded-size';
         this.API_POST_MUSIC_EDIT = 'api/music/edit/{musicId}';
         this.API_POST_MUSIC_DELETE = 'api/music/delete/{musicId}';
+        this.API_POST_MUSICS_GET_BY_IDS = 'api/music/ids';
         this.API_GET_ALBUM_PAGINATE = 'api/album/paginate';
         this.API_POST_ALBUM_CREATE = 'api/album/create';
         this.API_POST_ALBUM_EDIT = 'api/album/edit/{albumId}';
@@ -223,6 +224,15 @@ export class AmaotoCoreService {
 
     getAlbumPaginate(page = 1, num = 15) {
         return this.doGet(this.url(this.API_GET_ALBUM_PAGINATE + '?page=' + page + '&num=' + num), (response)=> {
+            this.$log.debug(response);
+            return angular.fromJson(response.data);
+        })
+    }
+
+    getMusicsByIds(ids) {
+        return this.doPost(this.url(this.API_POST_MUSICS_GET_BY_IDS), {
+            ids: ids
+        }, (response)=> {
             this.$log.debug(response);
             return angular.fromJson(response.data);
         })

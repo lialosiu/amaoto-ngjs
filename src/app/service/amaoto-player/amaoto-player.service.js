@@ -1,11 +1,13 @@
 export class AmaotoPlayerService {
-    constructor($log, toastr, $http, $mdDialog, $timeout, $window) {
+    constructor($log, toastr, $http, $mdDialog, $timeout, $window, $cookies, $amaotoCore) {
         'ngInject';
         this.$log = $log;
         this.$http = $http;
         this.toastr = toastr;
         this.$timeout = $timeout;
         this.$mdDialog = $mdDialog;
+        this.$cookies = $cookies;
+        this.$amaotoCore = $amaotoCore;
 
         this.player = {};
         this.player.audio = $window.Audio ? new $window.Audio() : {};
@@ -16,6 +18,7 @@ export class AmaotoPlayerService {
 
         this.ready();
         this.playlist = [];
+        this.initByCookies();
 
         this.player.audio.addEventListener('timeupdate', ()=> {
             $timeout(()=> {
@@ -29,6 +32,12 @@ export class AmaotoPlayerService {
                 this.ready();
             }
         });
+
+        this.player.audio.addEventListener('error', ()=> {
+            if (!this.next()) {
+                this.ready();
+            }
+        });
     }
 
     insertMusicToPlaylist(music, playNow) {
@@ -36,14 +45,17 @@ export class AmaotoPlayerService {
         this.playlist.splice(current + 1, 0, music);
         if (playNow)
             this.next();
+        this.updateCookies();
     }
 
     addMusicToPlaylist(music) {
         this.playlist.push(music);
+        this.updateCookies();
     }
 
     removeMusicFormPlaylistByIndex(index) {
         this.playlist.splice(index, 1);
+        this.updateCookies();
     }
 
     insertAlbumToPlaylist(album, playNow) {
@@ -54,12 +66,14 @@ export class AmaotoPlayerService {
         }
         if (playNow)
             this.next();
+        this.updateCookies();
     }
 
     addAlbumToPlaylist(album) {
         for (let music of album.musics) {
             this.addMusicToPlaylist(music);
         }
+        this.updateCookies();
     }
 
     loadMusic(music) {
@@ -85,6 +99,7 @@ export class AmaotoPlayerService {
     play() {
         this.player.audio.play();
         this.playing.status = 'playing';
+        this.updateCookies();
     }
 
     pause() {
@@ -97,7 +112,6 @@ export class AmaotoPlayerService {
         this.player.audio.currentTime = 0;
         this.playing.status = 'loaded';
     }
-
 
     prev() {
         let current = this.playlist.indexOf(this.playing);
@@ -176,5 +190,36 @@ export class AmaotoPlayerService {
                 this.player.loopType = 'queue';
                 break;
         }
+    }
+
+    updateCookies() {
+        let ids = [];
+        for (let music of this.playlist) {
+            ids.push(music.id)
+        }
+        this.$cookies.putObject('playlist-music-ids', ids, {
+            expires: new Date(new Date().getTime() + 365 * 86400000)
+        });
+        this.$cookies.put('playing-music-id', this.playing.id, {
+            expires: new Date(new Date().getTime() + 365 * 86400000)
+        });
+    }
+
+    initByCookies() {
+        let ids = this.$cookies.getObject('playlist-music-ids');
+        let playingMusicId = this.$cookies.get('playing-music-id');
+
+        if (!ids)
+            return;
+
+        this.$amaotoCore.getMusicsByIds(ids).then((rsp)=> {
+            this.playlist = rsp.data;
+            for (let music of this.playlist) {
+                if (music.id == playingMusicId) {
+                    this.loadMusic(music);
+                    break;
+                }
+            }
+        });
     }
 }
