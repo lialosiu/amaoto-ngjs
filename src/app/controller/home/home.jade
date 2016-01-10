@@ -3,7 +3,7 @@
 
     div(layout='row', layout-fill)
         div.home-sidebar-left(layout='column')
-            md-button(ng-click='home.$state.go("home")')
+            md-button(ng-click='home.$state.go("home.homepage")')
                 md-icon home
                 |  首页
             md-button(ng-click='home.$state.go("home.album")')
@@ -16,5 +16,3 @@
             amaoto-user-menu
 
         div(ui-view='home.frame', flex, layout-padding)
-            md-grid-list(md-cols-sm='1', md-cols-md='2', md-cols-gt-md='6', md-row-height-gt-md="1:1", md-row-height="4:3", md-gutter="8px", md-gutter-gt-sm="4px")
-                md-grid-tile(ng-repeat='album in home.albums')

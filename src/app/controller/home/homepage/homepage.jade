@@ -22,16 +22,16 @@ div#homepage
                     div(ng-show='album.ngView.mouseover', layout='column')
                         br
                         div(layout='row', flex)
-                            md-button.md-raised.md-icon-button(ng-click='amaoto.$amaotoPlayer.loadMusicAndPlay(music)')
+                            md-button.md-raised.md-icon-button(ng-click='amaoto.$amaotoPlayer.insertAlbumToPlaylist(album, true)')
                                 md-icon play_arrow
-                            md-button.md-raised.md-icon-button(ng-click='amaoto.$amaotoPlayer.loadMusicAndPlay(music)')
+                            md-button.md-raised.md-icon-button(ng-click='amaoto.$amaotoPlayer.addAlbumToPlaylist(album)')
                                 md-icon playlist_add
 
     div(layout='column', layout-padding)
         h2.md-headline 单曲
         div(layout='row', layout-padding)
             div(flex='5')
-            md-grid-list.music(md-col-xs='1', md-cols-sm='2', md-cols-md='6', md-cols-gt-md='6', md-cols-gt-lg='12', md-row-height='1:1', md-gutter='15px', flex)
+            md-grid-list.music(md-col-xs='1', md-cols-sm='2', md-cols-md='6', md-cols-gt-md='6', md-cols-gt-xl='12', md-row-height='1:1', md-gutter='15px', flex)
                 md-grid-tile(ng-repeat='music in homepage.musics', md-colspan="1", ng-init='music.ngView = {}', ng-mouseover='music.ngView.mouseover = true', ng-mouseleave='music.ngView.mouseover = false', style='background-image: url({{ music.show_thumbnail_cover_url || "assets/images/no-cover-300.jpg" }});')
                     div.active-mask(ng-show='music.ngView.mouseover')
 
@@ -43,7 +43,7 @@ div#homepage
                     div(ng-show='music.ngView.mouseover', layout='column')
                         br
                         div(layout='row', flex)
-                            md-button.md-raised.md-icon-button(ng-click='amaoto.$amaotoPlayer.loadMusicAndPlay(music)')
+                            md-button.md-raised.md-icon-button(ng-click='amaoto.$amaotoPlayer.insertMusicToPlaylist(music, true)')
                                 md-icon play_arrow
-                            md-button.md-raised.md-icon-button(ng-click='amaoto.$amaotoPlayer.loadMusicAndPlay(music)')
+                            md-button.md-raised.md-icon-button(ng-click='amaoto.$amaotoPlayer.addMusicToPlaylist(music)')
                                 md-icon playlist_add

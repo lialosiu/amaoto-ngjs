@@ -20,10 +20,10 @@
     "angular": "~1.4.2",
     "ng-file-upload": "~10.0.2",
     "ng-file-upload-shim": "~10.0.2",
-    "angular-audio": "~1.7.1",
     "angular-material-data-table": "~0.9.7",
     "angular-moment": "~0.10.3",
-    "textillate": "~0.4.0"
+    "textillate": "~0.4.0",
+    "lialosiu-dancer": "~0.4.3"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.2"

@@ -1,17 +1,35 @@
 div.amaoto-v2-player
     div.cover
-        img(ng-src='{{ vm.$amaotoPlayer.playing.cover_thumbnail }}')
+        img(ng-src='{{ vm.$amaotoPlayer.playing.show_thumbnail_cover_url || "assets/images/no-cover-300.jpg"}}')
     div.player
         div.meta
             span.title {{ vm.$amaotoPlayer.playing.title }}
             span.artist {{ vm.$amaotoPlayer.playing.artist ? '&nbsp;-&nbsp;' + vm.$amaotoPlayer.playing.artist : '' }}
-            md-progress-linear.progress.md-warn(md-mode='{{ vm.$amaotoPlayer.player.canPlay ? "buffer": "indeterminate" }}', value='{{ vm.$amaotoPlayer.player.progress * 100 }}', md-buffer-value='{{ vm.$amaotoPlayer.player.audio.buffered.length > 0 ? vm.$amaotoPlayer.player.audio.buffered.end(vm.$amaotoPlayer.player.audio.buffered.length - 1) / vm.$amaotoPlayer.player.audio.duration * 100 : 0 }}')
-            md-slider.progress-setter.md-warn(aria-label='progress', ng-model='vm.$amaotoPlayer.player.progress', min='0', max='1', step='0.001')
+            md-progress-linear.progress.md-warn(md-mode='{{ vm.$amaotoPlayer.player.audio.readyState >= 3 ? "buffer": "query" }}', value='{{ vm.$amaotoPlayer.player.playedProgress }}', md-buffer-value='{{ vm.$amaotoPlayer.player.bufferedProgress }}')
+            md-slider.progress-setter.md-warn(aria-label='progress', ng-model='vm.$amaotoPlayer.player.audio.currentTime', min='0', max='{{ vm.$amaotoPlayer.player.audio.duration }}', step='1')
         div.controller
-            div.playlist
-                div 123
-            div.btns
-                md-button.md-fab.md-mini.md-warn(ng-click='vm.$amaotoPlayer.player.play()')
+            md-content.playlist
+                md-list
+                    md-list-item.row(layout='row', ng-repeat='music in vm.$amaotoPlayer.playlist track by $index', ng-class='music.status')
+                        div.index(flex='5') {{ $index }}
+                        div.title(flex='35') {{ music.title }}
+                        div.artist(flex='25') {{ music.artist }}
+                        div(flex)
+                        div.md-secondary.btns(layout='row', flex='25')
+                            md-button.md-icon-button(ng-click='vm.$amaotoPlayer.loadMusicAndPlay(music)')
+                                md-icon play_arrow
+                            md-button.md-icon-button(ng-click='vm.$amaotoPlayer.removeMusicFormPlaylistByIndex($index)')
+                                md-icon clear
+                            md-button.md-icon-button(href="{{ music.download_url }}" target="_blank")
+                                md-icon file_download
+            div.btns(layout='row', layout-padding)
+                md-button.md-fab.md-mini.md-warn(ng-click='vm.$amaotoPlayer.play()')
                     md-icon play_arrow
-                md-button.md-fab.md-mini.md-warn(ng-click='vm.$amaotoPlayer.player.stop()')
+                md-button.md-fab.md-mini.md-warn(ng-click='vm.$amaotoPlayer.pause()')
+                    md-icon pause
+                md-button.md-fab.md-mini.md-warn(ng-click='vm.$amaotoPlayer.stop()')
                     md-icon stop
+                md-button.md-fab.md-mini.md-warn(ng-click='vm.$amaotoPlayer.prev()')
+                    md-icon skip_previous
+                md-button.md-fab.md-mini.md-warn(ng-click='vm.$amaotoPlayer.next()')
+                    md-icon skip_next

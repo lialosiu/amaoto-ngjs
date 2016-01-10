@@ -16,6 +16,14 @@
           url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.woff) format('woff'),
           url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.ttf) format('truetype');
 
+@keyframes mask-blink
+  0%
+    background rgba(0 0 0 .3)
+  50%
+    background rgba(0 0 0 .1)
+  100%
+    background rgba(0 0 0 .3)
+
 .material-icons
   font-family: 'Material Icons';
   font-weight: normal;
@@ -110,6 +118,16 @@ section
     height 55px
     width auto
 
+
+
+@keyframes amaoto-v2-player-playing-blink
+  0%
+    background rgba(57, 252, 36, 0.1)
+  50%
+    background rgba(57, 252, 36, 0.3)
+  100%
+    background rgba(57, 252, 36, 0.1)
+
 .amaoto-v2-player
   position fixed
   top 0
@@ -164,19 +182,41 @@ section
         left 0
         right 0
         margin 0
-      &:hover
-        .progress
-          opacity 0
-        .progress-setter
-          opacity 1
     .controller
-      display none
       background rgba(255 255 255 .7)
       box-shadow 2px 2px 15px rgba(0 0 0 .3)
       overflow hidden
+      height 0
+      transition height 0.3s
       .playlist
-        min-height 400px
+        background rgba(255 255 255 .9)
+        border-radius 3px
+        box-shadow 0 0 2px rgba(0 0 0 .3)
+        height 400px
         margin 30px
+        .row
+          padding 0 20px
+          &.played
+            background rgba(200, 180, 180, 0.2)
+          &.playing
+            background rgba(57, 252, 36, 0.2)
+            -webkit-animation: amaoto-v2-player-playing-blink 2s infinite;
+            -moz-animation: amaoto-v2-player-playing-blink 2s infinite;
+            -ms-animation: amaoto-v2-player-playing-blink 2s infinite;
+            animation: amaoto-v2-player-playing-blink 2s infinite;
+        .index
+          color #7d542d
+        .title
+          color #780000
+        .artist
+          color #007ea8
+    &:hover
+      .progress
+        opacity 0
+      .progress-setter
+        opacity 1
+      .controller
+        height 550px
     //  transition opacity 0.3s
     //  opacity 0
     //&:hover
@@ -190,7 +230,7 @@ section
     .cover
       height 140px
       width 140px
-      border-radius 0
+      border-radius 1px
     .player
       left 140px
 
@@ -202,7 +242,7 @@ section
     width 138px
     padding-top 10px
     background rgba(240 240 240 0.8)
-    box-shadow 0 0 10px rgba(0 0 0 0.5)
+    box-shadow 2px 0 10px rgba(0 0 0 0.5)
     z-index 20
 
   [ui-view='home.frame']

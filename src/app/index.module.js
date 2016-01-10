@@ -46,7 +46,6 @@ angular.module('amaotoNgjs', [
         'ngMaterial',
         'toastr',
         'ngFileUpload',
-        'ngAudio',
         'md.data.table',
         'angularMoment'
     ])
