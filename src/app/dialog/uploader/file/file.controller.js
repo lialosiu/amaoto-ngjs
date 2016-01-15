@@ -38,12 +38,12 @@ export class FileUploaderDialogController {
             file.status = 'uploading';
             file.uploadProgress = 0;
             this.Upload.upload({
-                url: self.$amaotoCore.url(self.$amaotoCore.API_POST_IMAGE_UPLOAD),
+                url: self.$amaotoCore.url(self.$amaotoCore.API_POST_FILE_UPLOAD),
                 data: {
                     'file': file.data,
                     'uniName': file.uniName
                 },
-                resumeSizeUrl: self.$amaotoCore.url(self.$amaotoCore.API_GET_IMAGE_UPLOADED_SIZE + '?uniName=' + file.uniName),
+                resumeSizeUrl: self.$amaotoCore.url(self.$amaotoCore.API_GET_FILE_UPLOADED_SIZE + '?uniName=' + file.uniName),
                 resumeChunkSize: '2MB'
             }).then(function (resp) {
                 // Success
