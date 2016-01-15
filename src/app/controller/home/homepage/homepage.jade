@@ -1,7 +1,7 @@
 div#homepage
-    div(ng-show='homepage.albumCount && homepage.musicCount')
+    div(ng-show='homepage.$amaotoCore.localData.serverInfo.albumCount && homepage.$amaotoCore.localData.serverInfo.musicCount')
         md-icon info
-        span  目前全站共有 {{ homepage.albumCount }} 张专辑， 共计 {{ homepage.musicCount }} 首单曲
+        span  目前全站共有 {{ homepage.$amaotoCore.localData.serverInfo.albumCount }} 张专辑， 共计 {{ homepage.$amaotoCore.localData.serverInfo.musicCount }} 首单曲
 
     div
         h2.md-display-1 随机推荐
