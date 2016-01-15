@@ -156,6 +156,8 @@ export class AmaotoCoreService {
             this.localData.serverInfo.siteName = rsp.data.site_name;
             this.localData.serverInfo.poweredName = rsp.data.powered_name;
             this.localData.serverInfo.version = rsp.data.version;
+            this.localData.serverInfo.musicCount = rsp.data.music_count;
+            this.localData.serverInfo.albumCount = rsp.data.album_count;
             return rsp;
         });
     }
