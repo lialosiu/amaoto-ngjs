@@ -9,8 +9,8 @@ md-dialog(aria-label='Music Uploader Dialog', flex)
             md-icon close
     md-dialog-content.md-dialog-content
         md-list
-            md-list-item(ng-repeat='file in vm.files', ng-switch='file.status')
-                md-card.file-list(layout='column', layout-padding, layout-fill, ng-switch-when='added')
+            md-list-item(ng-repeat='file in vm.files', ng-switch='file.status', layout-padding)
+                md-card.file-list(layout='column', layout-fill, ng-switch-when='added')
                     div(layout='row', layout-align='space-between', layout-fill)
                         div.file-name(flex) {{ file.name }}
                         div.file-size
@@ -20,7 +20,7 @@ md-dialog(aria-label='Music Uploader Dialog', flex)
                             small {{ file.mime }}
                         div.file-status
                             small 待上传
-                md-card.file-list(layout='column', layout-padding, layout-fill, ng-switch-when='uploading')
+                md-card.file-list(layout='column', layout-fill, ng-switch-when='uploading')
                     div(layout='row', layout-align='space-between', layout-fill)
                         div.file-name(flex) {{ file.name }}
                         div.file-size
@@ -31,7 +31,7 @@ md-dialog(aria-label='Music Uploader Dialog', flex)
                         div.file-status
                             small 正在上传
                     md-progress-linear.file-upload-progress(md-mode='determinate', value='{{ file.uploadProgress }}')
-                md-card.file-list(layout='row', layout-padding, layout-fill, ng-switch-when='uploaded.music')
+                md-card.file-list(layout='row', layout-fill, ng-switch-when='uploaded.music')
                     img.image-thumb(ng-src='{{ file.uploaded.show_thumbnail_cover_url }}')
                     div(layout='column', flex)
                         div(layout='row', layout-fill)

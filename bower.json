@@ -2,33 +2,30 @@
   "name": "amaotoNgjs",
   "version": "0.0.0",
   "dependencies": {
-    "angular-animate": "~1.4.2",
-    "angular-cookies": "~1.4.2",
-    "angular-touch": "~1.4.2",
-    "angular-sanitize": "~1.4.2",
-    "angular-messages": "~1.4.2",
-    "angular-aria": "~1.4.2",
+    "angular-animate": "~1.4.9",
+    "angular-cookies": "~1.4.9",
+    "angular-touch": "~1.4.9",
+    "angular-sanitize": "~1.4.9",
+    "angular-messages": "~1.4.9",
+    "angular-aria": "~1.4.9",
     "jquery": "~2.1.4",
-    "angular-resource": "~1.4.2",
-    "angular-ui-router": "~0.2.15",
-    "angular-material": "~1.0.1",
+    "angular-resource": "~1.4.9",
+    "angular-ui-router": "~0.2.17",
+    "angular-material": "~1.0.4",
     "material-design-iconfont": "~0.0.2",
     "malarkey": "yuanqing/malarkey#~1.3.1",
     "angular-toastr": "~1.5.0",
     "moment": "~2.10.6",
     "animate.css": "~3.5.1",
-    "angular": "~1.4.2",
+    "angular": "~1.4.9",
     "ng-file-upload": "~10.0.2",
     "ng-file-upload-shim": "~10.0.2",
-    "angular-material-data-table": "~0.9.7",
+    "angular-material-data-table": "~0.9.9",
     "angular-moment": "~0.10.3",
     "textillate": "~0.4.0",
     "lialosiu-dancer": "~0.4.3"
   },
   "devDependencies": {
-    "angular-mocks": "~1.4.2"
-  },
-  "resolutions": {
-    "angular": "~1.4.2"
+    "angular-mocks": "~1.4.9"
   }
 }

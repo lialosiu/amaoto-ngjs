@@ -4,9 +4,6 @@ export function V2AmaotoPlayerDirective() {
     let directive = {
         restrict: 'E',
         templateUrl: 'app/directive/player/amaoto/v2/v2.html',
-        scope: {
-            creationDate: '='
-        },
         controller: V2AmaotoPlayerController,
         controllerAs: 'vm',
         bindToController: true

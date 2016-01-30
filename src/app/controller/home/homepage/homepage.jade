@@ -3,47 +3,58 @@ div#homepage
         md-icon info
         span  目前全站共有 {{ homepage.$amaotoCore.localData.serverInfo.albumCount }} 张专辑， 共计 {{ homepage.$amaotoCore.localData.serverInfo.musicCount }} 首单曲
 
+    br
     div
-        h2.md-display-1 随机推荐
+        md-grid-list(md-col-xs='4', md-cols-sm='6', md-cols-md='8', md-cols-gt-md='8', md-cols-gt-lg='8', md-row-height='1:1', md-gutter='1.5em', flex)
+            md-grid-tile(ng-repeat='item in homepage.amaotoFlow', md-rowspan="{{ item.type == 'music'? 1 : 2 }}", md-colspan="{{ item.type == 'music'? 1 : 2 }}", ng-init='item.ngView = {}; data = item.data', ng-mouseover='item.ngView.mouseover = true', ng-mouseleave='item.ngView.mouseover = false')
+                div(ng-show='item.type == "album"', layout-fill)
+                    div.cover(style='background-image: url({{ item.data.show_thumbnail_cover_url || "assets/images/no-cover-300.jpg" }});', layout-fill, layout='row', layout-align='center center')
+                        div.active-mask(ng-show='item.ngView.mouseover')
 
-    div(layout='column', layout-padding)
-        h2.md-headline 专辑
-        div(layout='row', layout-padding)
-            div(flex='5')
-            md-grid-list.album(md-col-xs='1', md-cols-sm='2', md-cols-md='4', md-cols-gt-md='4', md-cols-gt-lg='6', md-row-height='1:1', md-gutter='15px', flex)
-                md-grid-tile(ng-repeat='album in homepage.albums', md-colspan="1", ng-init='album.ngView = {}', ng-mouseover='album.ngView.mouseover = true', ng-mouseleave='album.ngView.mouseover = false', style='background-image: url({{ album.show_thumbnail_cover_url || "assets/images/no-cover-300.jpg" }});')
-                    div.active-mask(ng-show='album.ngView.mouseover')
+                        md-grid-tile-header
+                            div.meta(layout='column')
+                                div.title {{ data.title }}
+                                div.artist {{ data.artist }}
 
-                    md-grid-tile-header
-                        div.meta(layout='column')
-                            div.title {{ album.title }}
-                            div.artist {{ album.artist }}
+                        div(ng-show='item.ngView.mouseover', layout='column')
+                            div(layout='row', flex)
+                                md-button.md-raised.md-icon-button(ng-click='amaoto.$amaotoPlayer.insertAlbumToPlaylist(data, true)')
+                                    md-icon play_arrow
+                                md-button.md-raised.md-icon-button(ng-click='amaoto.$amaotoPlayer.addAlbumToPlaylist(data)')
+                                    md-icon playlist_add
+                div(ng-show='item.type == "music"', layout-fill, layout='row')
+                    div.cover(style='background-image: url({{ item.data.show_thumbnail_cover_url || "assets/images/no-cover-300.jpg" }});', layout-fill, layout='row', layout-align='center center')
+                        div.active-mask(ng-show='item.ngView.mouseover')
 
-                    div(ng-show='album.ngView.mouseover', layout='column')
-                        br
-                        div(layout='row', flex)
-                            md-button.md-raised.md-icon-button(ng-click='amaoto.$amaotoPlayer.insertAlbumToPlaylist(album, true)')
-                                md-icon play_arrow
-                            md-button.md-raised.md-icon-button(ng-click='amaoto.$amaotoPlayer.addAlbumToPlaylist(album)')
-                                md-icon playlist_add
+                        md-grid-tile-header
+                            div.meta(layout='column')
+                                div.title {{ data.title }}
+                                div.artist {{ data.artist }}
 
-    div(layout='column', layout-padding)
-        h2.md-headline 单曲
-        div(layout='row', layout-padding)
-            div(flex='5')
-            md-grid-list.music(md-col-xs='1', md-cols-sm='2', md-cols-md='6', md-cols-gt-md='6', md-cols-gt-xl='12', md-row-height='1:1', md-gutter='15px', flex)
-                md-grid-tile(ng-repeat='music in homepage.musics', md-colspan="1", ng-init='music.ngView = {}', ng-mouseover='music.ngView.mouseover = true', ng-mouseleave='music.ngView.mouseover = false', style='background-image: url({{ music.show_thumbnail_cover_url || "assets/images/no-cover-300.jpg" }});')
-                    div.active-mask(ng-show='music.ngView.mouseover')
-
-                    md-grid-tile-header
-                        div.meta(layout='column')
-                            div.title {{ music.title }}
-                            div.artist {{ music.artist }}
-
-                    div(ng-show='music.ngView.mouseover', layout='column')
-                        br
-                        div(layout='row', flex)
-                            md-button.md-raised.md-icon-button(ng-click='amaoto.$amaotoPlayer.insertMusicToPlaylist(music, true)')
-                                md-icon play_arrow
-                            md-button.md-raised.md-icon-button(ng-click='amaoto.$amaotoPlayer.addMusicToPlaylist(music)')
-                                md-icon playlist_add
+                        div(ng-show='item.ngView.mouseover', layout='column')
+                            div(layout='row', flex)
+                                md-button.md-raised.md-icon-button(ng-click='amaoto.$amaotoPlayer.insertMusicToPlaylist(data, true)')
+                                    md-icon play_arrow
+                                md-button.md-raised.md-icon-button(ng-click='amaoto.$amaotoPlayer.addMusicToPlaylist(data)')
+                                    md-icon playlist_add
+    //
+    //div(layout='column', layout-padding)
+    //    h2.md-headline 单曲
+    //    div(layout='row', layout-padding)
+    //        div(flex='5')
+    //        md-grid-list.music(md-col-xs='1', md-cols-sm='2', md-cols-md='6', md-cols-gt-md='6', md-cols-gt-xl='12', md-row-height='1:1', md-gutter='15px', flex)
+    //            md-grid-tile(ng-repeat='music in homepage.musics', md-colspan="1", ng-init='music.ngView = {}', ng-mouseover='music.ngView.mouseover = true', ng-mouseleave='music.ngView.mouseover = false', style='background-image: url({{ music.show_thumbnail_cover_url || "assets/images/no-cover-300.jpg" }});')
+    //                div.active-mask(ng-show='music.ngView.mouseover')
+    //
+    //                md-grid-tile-header
+    //                    div.meta(layout='column')
+    //                        div.title {{ music.title }}
+    //                        div.artist {{ music.artist }}
+    //
+    //                div(ng-show='music.ngView.mouseover', layout='column')
+    //                    br
+    //                    div(layout='row', flex)
+    //                        md-button.md-raised.md-icon-button(ng-click='amaoto.$amaotoPlayer.insertMusicToPlaylist(music, true)')
+    //                            md-icon play_arrow
+    //                        md-button.md-raised.md-icon-button(ng-click='amaoto.$amaotoPlayer.addMusicToPlaylist(music)')
+    //                            md-icon playlist_add

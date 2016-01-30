@@ -7,8 +7,9 @@ export class AmaotoCoreService {
         this.$timeout = $timeout;
         this.$mdDialog = $mdDialog;
 
-        this.API_HOST = 'http://amaoto-core.homestead.lialosiu.com/';
+        this.API_HOST = 'http://localhost/amaoto-core/';
         this.API_GET_SYSTEM_INFO = 'api/system/info';
+        this.API_GET_AMAOTO_FLOW = 'api/system/amaoto-flow';
         this.API_POST_AUTH_SIGN_IN = 'api/auth/sign-in';
         this.API_GET_AUTH_CURRENT_USER = 'api/auth/current-user';
         this.API_GET_USER_PAGINATE = 'api/user/paginate';
@@ -159,6 +160,12 @@ export class AmaotoCoreService {
             this.localData.serverInfo.musicCount = rsp.data.music_count;
             this.localData.serverInfo.albumCount = rsp.data.album_count;
             return rsp;
+        });
+    }
+
+    getAmaotoFlow() {
+        return this.doGet(this.url(this.API_GET_AMAOTO_FLOW), (response)=> {
+            return angular.fromJson(response.data);
         });
     }
 

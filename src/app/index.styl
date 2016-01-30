@@ -131,12 +131,13 @@ section
   top 0
   left 0
   right 0
+  z-index 20
   .cover
     position absolute
     top 0
     left 0
-    height 100px
-    width 100px
+    height 140px
+    width 140px
     border-radius 0 0 5px 0
     box-shadow 0 0 15px rgba(0 0 0 0.5)
     overflow hidden
@@ -148,7 +149,7 @@ section
     $height = 50px
     position absolute
     top 0
-    left 100px
+    left 140px
     right 0
     height $height
     background rgba(240 240 240 0.8)
@@ -185,6 +186,7 @@ section
       box-shadow 2px 2px 15px rgba(0 0 0 .3)
       overflow hidden
       height 0
+      border-radius 0 0 0 5px
       transition height 0.3s
       .main-btns, .sub-btns
         padding 20px 30px
@@ -227,25 +229,13 @@ section
 #home
   min-height 100%
   background url(../assets/images/bg.gif) repeat
-  .amaoto-v2-player
-    z-index 20
-    .cover
-      height 140px
-      width 140px
-      border-radius 1px
-    .player
-      left 140px
 
   .home-sidebar-left
     position fixed
-    top 140px
+    top 200px
     bottom 0
     left 0
-    width 138px
     padding-top 10px
-    background rgba(240 240 240 0.8)
-    box-shadow 0 2px 10px rgba(0 0 0 0.5)
-    z-index 20
 
   [ui-view='home.frame']
     margin-top 64px
@@ -283,42 +273,51 @@ section
       .artist
         color #007ea8
 
-md-grid-tile.album
-  box-shadow 0 0 3px rgba(0 0 0 0.3)
+md-grid-list
+  md-grid-tile
+    background rgba(250 250 250 1)
+    box-shadow 1px 1px 10px rgba(0 0 0 0.3)
+    .cover
+      background-size cover
+      background-position center
+    md-grid-tile-header
+      & > figcaption
+        width 100%
+      text-shadow 0 0 3px rgba(255 255 255 .5)
+      background rgba(0 0 0 .5)
+    .meta
+      .title
+        white-space nowrap
+        text-overflow ellipsis
+        overflow hidden
+        font-size 1em
+        color #fcff9b
+        padding 3px 6px 0
+      .artist
+        white-space nowrap
+        text-overflow ellipsis
+        overflow hidden
+        font-size 0.8em
+        padding 3px 6px 0
+    .active-mask
+      background rgba(0 0 0 .3)
+      position absolute
+      top 0
+      bottom 0
+      left 0
+      right 0
+    .music
+      .cover
+        height 100%
+        width auto
+      .meta
+        position relative
+        .title
+          color #336
+
   md-grid-tile-footer
     text-align center
     background rgba(0 0 0 0.5)
-
-md-grid-list
-  &.music, &.album
-    md-grid-tile
-      box-shadow 0 0 3px rgba(0 0 0 0.5)
-      background-size cover
-      background-position center
-      md-grid-tile-header
-        & > figcaption
-          width 100%
-        text-shadow 0 0 3px rgba(255 255 255 .5)
-        background rgba(0 0 0 .5)
-      .meta
-        overflow hidden
-        margin .5em
-        & > *
-          white-space nowrap
-          overflow hidden
-          text-overflow ellipsis
-        .title
-          font-size 1em
-          color #fcff9b
-        .artist
-          font-size 0.8em
-      .active-mask
-        background rgba(0 0 0 .3)
-        position absolute
-        top 0
-        bottom 0
-        left 0
-        right 0
 
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject

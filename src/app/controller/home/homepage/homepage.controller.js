@@ -10,12 +10,8 @@ export class HomapageController {
         this.$amaotoPlayer = $amaotoPlayer;
         this.$window = $window;
 
-        $amaotoCore.getAlbumPaginate(1, 12).then((rsp)=> {
-            this.albums = rsp.data.data;
-        });
-
-        $amaotoCore.getMusicPaginate(4, 12).then((rsp)=> {
-            this.musics = rsp.data.data;
+        $amaotoCore.getAmaotoFlow().then((rsp)=> {
+            this.amaotoFlow = rsp.data;
         });
     }
 

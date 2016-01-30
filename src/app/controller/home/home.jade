@@ -3,16 +3,7 @@
 
     div(layout='row', layout-fill)
         div.home-sidebar-left(layout='column')
-            md-button(ng-click='home.$state.go("home.homepage")')
-                md-icon home
-                |  首页
-            md-button(ng-click='home.$state.go("home.album")')
-                md-icon album
-                |  专辑
-            md-button(ng-click='home.$state.go("home.music")')
-                md-icon audiotrack
-                |  音乐
-            span(flex)
+            div(flex)
             amaoto-user-menu
 
         div(ui-view='home.frame', flex, layout-padding)
